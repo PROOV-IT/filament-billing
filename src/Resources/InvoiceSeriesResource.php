@@ -8,7 +8,10 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Proovit\Billing\Models\InvoiceSeries;
+use Proovit\FilamentBilling\Resources\InvoiceSeriesResource\Pages\CreateInvoiceSeries;
+use Proovit\FilamentBilling\Resources\InvoiceSeriesResource\Pages\EditInvoiceSeries;
 use Proovit\FilamentBilling\Resources\InvoiceSeriesResource\Pages\ManageInvoiceSeries;
+use Proovit\FilamentBilling\Resources\InvoiceSeriesResource\Pages\ViewInvoiceSeries;
 use Proovit\FilamentBilling\Support\Filament\Schemas\InvoiceSeries\InvoiceSeriesFormSchema;
 use Proovit\FilamentBilling\Support\Filament\Schemas\InvoiceSeries\InvoiceSeriesInfolistSchema;
 use Proovit\FilamentBilling\Support\Filament\Tables\InvoiceSeries\InvoiceSeriesTable;
@@ -57,6 +60,9 @@ final class InvoiceSeriesResource extends Resource
     {
         return [
             'index' => ManageInvoiceSeries::route('/'),
+            'create' => CreateInvoiceSeries::route('/create'),
+            'view' => ViewInvoiceSeries::route('/{record}'),
+            'edit' => EditInvoiceSeries::route('/{record}/edit'),
         ];
     }
 }

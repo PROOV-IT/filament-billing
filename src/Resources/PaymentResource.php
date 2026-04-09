@@ -8,7 +8,10 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Proovit\Billing\Models\Payment;
+use Proovit\FilamentBilling\Resources\PaymentResource\Pages\CreatePayment;
+use Proovit\FilamentBilling\Resources\PaymentResource\Pages\EditPayment;
 use Proovit\FilamentBilling\Resources\PaymentResource\Pages\ManagePayments;
+use Proovit\FilamentBilling\Resources\PaymentResource\Pages\ViewPayment;
 use Proovit\FilamentBilling\Resources\PaymentResource\RelationManagers\AllocationsRelationManager;
 use Proovit\FilamentBilling\Support\Filament\Schemas\Payments\PaymentFormSchema;
 use Proovit\FilamentBilling\Support\Filament\Schemas\Payments\PaymentInfolistSchema;
@@ -65,6 +68,9 @@ final class PaymentResource extends Resource
     {
         return [
             'index' => ManagePayments::route('/'),
+            'create' => CreatePayment::route('/create'),
+            'view' => ViewPayment::route('/{record}'),
+            'edit' => EditPayment::route('/{record}/edit'),
         ];
     }
 }

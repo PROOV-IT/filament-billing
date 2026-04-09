@@ -4,8 +4,15 @@ declare(strict_types=1);
 
 namespace Proovit\FilamentBilling\Support\Filament\Tables\InvoiceSeries;
 
+use Filament\Actions\CreateAction;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Proovit\Billing\Models\InvoiceSeries;
+use Proovit\FilamentBilling\Resources\InvoiceSeriesResource;
 use Proovit\FilamentBilling\Support\Filament\EnumLabel;
 
 final class InvoiceSeriesTable
@@ -22,6 +29,40 @@ final class InvoiceSeriesTable
                 TextColumn::make('current_sequence')->label(__('filament-billing::filament-billing.columns.current_sequence'))->sortable(),
                 TextColumn::make('is_default')->label(__('filament-billing::filament-billing.columns.default'))->badge()->formatStateUsing(static fn (bool $state): string => $state ? __('filament-billing::filament-billing.booleans.yes') : __('filament-billing::filament-billing.booleans.no')),
             ])
+            ->headerActions([
+                CreateAction::make()
+                    ->label(__('filament-billing::filament-billing.actions.create'))
+                    ->icon('heroicon-o-plus')
+                    ->url(fn (): string => InvoiceSeriesResource::getUrl('create')),
+            ])
+            ->recordActions([
+                ViewAction::make()
+                    ->label(__('filament-billing::filament-billing.actions.view'))
+                    ->url(fn (InvoiceSeries $record): string => InvoiceSeriesResource::getUrl('view', ['record' => $record->getRouteKey()])),
+                EditAction::make()
+                    ->label(__('filament-billing::filament-billing.actions.edit'))
+                    ->url(fn (InvoiceSeries $record): string => InvoiceSeriesResource::getUrl('edit', ['record' => $record->getRouteKey()]))
+                    ->visible(fn (InvoiceSeries $record): bool => self::canEdit($record)),
+                DeleteAction::make()
+                    ->label(__('filament-billing::filament-billing.actions.delete'))
+                    ->visible(fn (InvoiceSeries $record): bool => self::canDelete($record)),
+            ])
+            ->bulkActions([
+                DeleteBulkAction::make()
+                    ->label(__('filament-billing::filament-billing.actions.bulk_delete')),
+            ])
+            ->checkIfRecordIsSelectableUsing(static fn (InvoiceSeries $record): bool => self::canDelete($record))
             ->defaultSort('name');
+    }
+
+    private static function canEdit(InvoiceSeries $record): bool
+    {
+        return $record->reservations()->doesntExist()
+            && $record->invoices()->doesntExist();
+    }
+
+    private static function canDelete(InvoiceSeries $record): bool
+    {
+        return self::canEdit($record);
     }
 }

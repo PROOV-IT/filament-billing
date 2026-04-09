@@ -8,7 +8,10 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Proovit\Billing\Models\TaxRate;
+use Proovit\FilamentBilling\Resources\TaxRateResource\Pages\CreateTaxRate;
+use Proovit\FilamentBilling\Resources\TaxRateResource\Pages\EditTaxRate;
 use Proovit\FilamentBilling\Resources\TaxRateResource\Pages\ManageTaxRates;
+use Proovit\FilamentBilling\Resources\TaxRateResource\Pages\ViewTaxRate;
 use Proovit\FilamentBilling\Support\Filament\Schemas\TaxRates\TaxRateFormSchema;
 use Proovit\FilamentBilling\Support\Filament\Schemas\TaxRates\TaxRateInfolistSchema;
 use Proovit\FilamentBilling\Support\Filament\Tables\TaxRates\TaxRateTable;
@@ -57,6 +60,9 @@ final class TaxRateResource extends Resource
     {
         return [
             'index' => ManageTaxRates::route('/'),
+            'create' => CreateTaxRate::route('/create'),
+            'view' => ViewTaxRate::route('/{record}'),
+            'edit' => EditTaxRate::route('/{record}/edit'),
         ];
     }
 }

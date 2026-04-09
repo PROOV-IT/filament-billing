@@ -4,8 +4,15 @@ declare(strict_types=1);
 
 namespace Proovit\FilamentBilling\Support\Filament\Tables\Companies;
 
+use Filament\Actions\CreateAction;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Proovit\Billing\Models\Company;
+use Proovit\FilamentBilling\Resources\CompanyResource;
 
 final class CompanyTable
 {
@@ -22,6 +29,36 @@ final class CompanyTable
                 TextColumn::make('phone')->label(__('filament-billing::filament-billing.columns.phone'))->toggleable(),
                 TextColumn::make('created_at')->label(__('filament-billing::filament-billing.columns.created_at'))->dateTime()->sortable()->toggleable(),
             ])
-            ->defaultSort('legal_name');
+            ->defaultSort('legal_name')
+            ->headerActions([
+                CreateAction::make()
+                    ->label(__('filament-billing::filament-billing.actions.create'))
+                    ->icon('heroicon-o-plus')
+                    ->url(fn (): string => CompanyResource::getUrl('create')),
+            ])
+            ->recordActions([
+                ViewAction::make()
+                    ->label(__('filament-billing::filament-billing.actions.view'))
+                    ->url(fn (Company $record): string => CompanyResource::getUrl('view', ['record' => $record->getRouteKey()])),
+                EditAction::make()
+                    ->label(__('filament-billing::filament-billing.actions.edit'))
+                    ->url(fn (Company $record): string => CompanyResource::getUrl('edit', ['record' => $record->getRouteKey()])),
+                DeleteAction::make()
+                    ->label(__('filament-billing::filament-billing.actions.delete'))
+                    ->visible(fn (Company $record): bool => self::canDelete($record)),
+            ])
+            ->bulkActions([
+                DeleteBulkAction::make()
+                    ->label(__('filament-billing::filament-billing.actions.bulk_delete')),
+            ])
+            ->checkIfRecordIsSelectableUsing(static fn (Company $record): bool => self::canDelete($record));
+    }
+
+    private static function canDelete(Company $record): bool
+    {
+        return $record->establishments()->doesntExist()
+            && $record->bankAccounts()->doesntExist()
+            && $record->customers()->doesntExist()
+            && $record->invoices()->doesntExist();
     }
 }

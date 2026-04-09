@@ -8,7 +8,10 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Proovit\Billing\Models\Product;
+use Proovit\FilamentBilling\Resources\ProductResource\Pages\CreateProduct;
+use Proovit\FilamentBilling\Resources\ProductResource\Pages\EditProduct;
 use Proovit\FilamentBilling\Resources\ProductResource\Pages\ManageProducts;
+use Proovit\FilamentBilling\Resources\ProductResource\Pages\ViewProduct;
 use Proovit\FilamentBilling\Resources\ProductResource\RelationManagers\PricesRelationManager;
 use Proovit\FilamentBilling\Support\Filament\Schemas\Products\ProductFormSchema;
 use Proovit\FilamentBilling\Support\Filament\Schemas\Products\ProductInfolistSchema;
@@ -58,6 +61,9 @@ final class ProductResource extends Resource
     {
         return [
             'index' => ManageProducts::route('/'),
+            'create' => CreateProduct::route('/create'),
+            'view' => ViewProduct::route('/{record}'),
+            'edit' => EditProduct::route('/{record}/edit'),
         ];
     }
 

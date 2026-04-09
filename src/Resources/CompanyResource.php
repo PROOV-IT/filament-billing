@@ -8,7 +8,10 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Proovit\Billing\Models\Company;
+use Proovit\FilamentBilling\Resources\CompanyResource\Pages\CreateCompany;
+use Proovit\FilamentBilling\Resources\CompanyResource\Pages\EditCompany;
 use Proovit\FilamentBilling\Resources\CompanyResource\Pages\ManageCompanies;
+use Proovit\FilamentBilling\Resources\CompanyResource\Pages\ViewCompany;
 use Proovit\FilamentBilling\Resources\CompanyResource\RelationManagers\BankAccountsRelationManager;
 use Proovit\FilamentBilling\Resources\CompanyResource\RelationManagers\EstablishmentsRelationManager;
 use Proovit\FilamentBilling\Support\Filament\Schemas\Companies\CompanyFormSchema;
@@ -59,6 +62,9 @@ final class CompanyResource extends Resource
     {
         return [
             'index' => ManageCompanies::route('/'),
+            'create' => CreateCompany::route('/create'),
+            'view' => ViewCompany::route('/{record}'),
+            'edit' => EditCompany::route('/{record}/edit'),
         ];
     }
 
