@@ -39,3 +39,17 @@ php artisan vendor:publish --tag=filament-billing-config
 ```bash
 php artisan vendor:publish --tag=filament-billing-views
 ```
+
+## Seed demo data
+
+For a demo-ready panel, seed the Filament billing dataset:
+
+```bash
+php artisan db:seed --class=Proovit\\FilamentBilling\\Database\\Seeders\\FilamentBillingDemoSeeder --force
+```
+
+If you are using Sail:
+
+```bash
+./vendor/bin/sail artisan db:seed --class=Proovit\\FilamentBilling\\Database\\Seeders\\FilamentBillingDemoSeeder --force
+```

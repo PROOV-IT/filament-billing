@@ -7,6 +7,7 @@ namespace Proovit\FilamentBilling\Support\Filament\Tables\Invoices;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Proovit\Billing\Models\Invoice;
+use Proovit\FilamentBilling\Support\Filament\Actions\Invoices\InvoiceRecordActions;
 
 final class InvoiceTable
 {
@@ -22,6 +23,7 @@ final class InvoiceTable
                 TextColumn::make('due_at')->label('Due')->date()->toggleable(),
                 TextColumn::make('total_amount')->label('Total')->formatStateUsing(static fn ($state, Invoice $record): string => number_format((float) $state, 2, ',', ' ').' '.($record->currency ?? 'EUR')),
             ])
+            ->recordActions(InvoiceRecordActions::make())
             ->defaultSort('created_at', 'desc');
     }
 }

@@ -14,6 +14,8 @@ Filament 5 panel plugin for the ProovIT billing core.
 - [Installation](docs/install.md)
 - [Configuration](docs/configuration.md)
 - [Billing dashboard](docs/use-cases/dashboard.md)
+- [Business actions](docs/use-cases/business-actions.md)
+- [Demo seeding](docs/use-cases/demo-seeding.md)
 - [Docs index](docs/index.md)
 
 ## Installation
@@ -48,3 +50,4 @@ When developing against the `dev` branch of this repository, require it explicit
 - Requires `proovit/laravel-billing:^1.0`
 - Requires Filament 5
 - The package is organized around native Filament resources, relation managers, and widgets instead of custom Blade screens
+- The demo seeder is designed for local testing and panel walkthroughs
