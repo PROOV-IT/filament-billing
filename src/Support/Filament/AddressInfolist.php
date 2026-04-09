@@ -13,12 +13,12 @@ final class AddressInfolist
     {
         return Section::make($label)
             ->schema([
-                TextEntry::make("{$statePath}.line1")->label('Line 1'),
-                TextEntry::make("{$statePath}.line2")->label('Line 2'),
-                TextEntry::make("{$statePath}.postal_code")->label('Postal code'),
-                TextEntry::make("{$statePath}.city")->label('City'),
-                TextEntry::make("{$statePath}.region")->label('Region'),
-                TextEntry::make("{$statePath}.country")->label('Country'),
+                TextEntry::make("{$statePath}.line1")->label(__('filament-billing::filament-billing.columns.line1')),
+                TextEntry::make("{$statePath}.line2")->label(__('filament-billing::filament-billing.columns.line2')),
+                TextEntry::make("{$statePath}.postal_code")->label(__('filament-billing::filament-billing.columns.postal_code')),
+                TextEntry::make("{$statePath}.city")->label(__('filament-billing::filament-billing.columns.city')),
+                TextEntry::make("{$statePath}.region")->label(__('filament-billing::filament-billing.columns.region')),
+                TextEntry::make("{$statePath}.country")->label(__('filament-billing::filament-billing.columns.country')),
             ])
             ->columns(2);
     }

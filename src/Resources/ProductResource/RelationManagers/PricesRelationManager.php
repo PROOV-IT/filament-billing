@@ -7,6 +7,7 @@ namespace Proovit\FilamentBilling\Resources\ProductResource\RelationManagers;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use Proovit\FilamentBilling\Support\Filament\RelationManagers\Products\PricesRelationManagerFormSchema;
 use Proovit\FilamentBilling\Support\Filament\RelationManagers\Products\PricesRelationManagerTable;
 
@@ -16,7 +17,12 @@ final class PricesRelationManager extends RelationManager
 
     protected static ?string $recordTitleAttribute = 'amount';
 
-    protected static ?string $title = 'Prices';
+    protected static ?string $title = null;
+
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
+    {
+        return __('filament-billing::filament-billing.sections.price');
+    }
 
     public function form(Schema $schema): Schema
     {

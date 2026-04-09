@@ -15,13 +15,13 @@ final class AddressesRelationManagerFormSchema
     public static function make(Schema $schema): Schema
     {
         return $schema->components([
-            Section::make('Address')
+            Section::make(__('filament-billing::filament-billing.sections.address'))
                 ->schema([
                     Select::make('type')
                         ->options([
-                            'billing' => 'Billing',
-                            'shipping' => 'Shipping',
-                            'other' => 'Other',
+                            'billing' => __('filament-billing::filament-billing.columns.type_billing'),
+                            'shipping' => __('filament-billing::filament-billing.columns.type_shipping'),
+                            'other' => __('filament-billing::filament-billing.columns.type_other'),
                         ])
                         ->required(),
                     TextInput::make('line1')->required()->maxLength(255),

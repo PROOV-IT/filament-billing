@@ -18,16 +18,16 @@ final class PaymentsRelationManagerFormSchema
     public static function make(Schema $schema): Schema
     {
         return $schema->components([
-            Section::make('Payment')
+            Section::make(__('filament-billing::filament-billing.sections.payment'))
                 ->schema([
                     Select::make('company_id')
-                        ->label('Company')
+                        ->label(__('filament-billing::filament-billing.resources.company.singular'))
                         ->relationship('company', 'legal_name')
                         ->searchable()
                         ->preload()
                         ->required(),
                     Select::make('customer_id')
-                        ->label('Customer')
+                        ->label(__('filament-billing::filament-billing.resources.customer.singular'))
                         ->relationship('customer', 'legal_name')
                         ->searchable()
                         ->preload(),

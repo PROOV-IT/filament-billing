@@ -14,11 +14,11 @@ final class AddressesRelationManagerTable
         return $table
             ->columns([
                 TextColumn::make('type')->badge(),
-                TextColumn::make('line1')->label('Address')->searchable()->sortable(),
-                TextColumn::make('postal_code')->label('Postal code')->toggleable(),
-                TextColumn::make('city')->label('City')->toggleable(),
-                TextColumn::make('country')->label('Country')->toggleable(),
-                TextColumn::make('is_default')->label('Default')->badge(),
+                TextColumn::make('line1')->label(__('filament-billing::filament-billing.sections.address'))->searchable()->sortable(),
+                TextColumn::make('postal_code')->label(__('filament-billing::filament-billing.columns.postal_code'))->toggleable(),
+                TextColumn::make('city')->label(__('filament-billing::filament-billing.columns.city'))->toggleable(),
+                TextColumn::make('country')->label(__('filament-billing::filament-billing.columns.country'))->toggleable(),
+                TextColumn::make('is_default')->label(__('filament-billing::filament-billing.columns.default'))->badge(),
             ])
             ->defaultSort('is_default', 'desc');
     }

@@ -13,14 +13,14 @@ final class CreditNoteInfolistSchema
     public static function make(Schema $schema): Schema
     {
         return $schema->components([
-            Section::make('Credit note details')
+            Section::make(__('filament-billing::filament-billing.sections.credit_note_details'))
                 ->schema([
-                    TextEntry::make('company.legal_name')->label('Company'),
-                    TextEntry::make('invoice.number')->label('Invoice'),
-                    TextEntry::make('status')->label('Status')->formatStateUsing(static fn ($state): string => is_object($state) && method_exists($state, 'label') ? $state->label() : (string) $state),
-                    TextEntry::make('number')->label('Number'),
-                    TextEntry::make('currency')->label('Currency'),
-                    TextEntry::make('total_amount')->label('Total'),
+                    TextEntry::make('company.legal_name')->label(__('filament-billing::filament-billing.resources.company.singular')),
+                    TextEntry::make('invoice.number')->label(__('filament-billing::filament-billing.resources.invoice.singular')),
+                    TextEntry::make('status')->label(__('filament-billing::filament-billing.columns.status'))->formatStateUsing(static fn ($state): string => is_object($state) && method_exists($state, 'label') ? $state->label() : (string) $state),
+                    TextEntry::make('number')->label(__('filament-billing::filament-billing.columns.number')),
+                    TextEntry::make('currency')->label(__('filament-billing::filament-billing.columns.currency')),
+                    TextEntry::make('total_amount')->label(__('filament-billing::filament-billing.columns.total')),
                 ])
                 ->columns(2),
         ]);

@@ -24,7 +24,7 @@ final class InvoicesRelationManagerTable
             ->columns([
                 TextColumn::make('number')->label(__('filament-billing::filament-billing.columns.number'))->searchable()->sortable(),
                 TextColumn::make('document_type')->label(__('filament-billing::filament-billing.columns.type'))->badge()->formatStateUsing(static fn ($state): string => is_object($state) && method_exists($state, 'label') ? $state->label() : (string) $state),
-                TextColumn::make('status')->label(__('filament-billing::filament-billing.columns.status'))->badge()->formatStateUsing(static fn ($state): string => is_object($state) && method_exists($state, 'label') ? $state->label() : 'Draft'),
+                TextColumn::make('status')->label(__('filament-billing::filament-billing.columns.status'))->badge()->formatStateUsing(static fn ($state): string => is_object($state) && method_exists($state, 'label') ? $state->label() : __('filament-billing::filament-billing.statuses.draft')),
                 TextColumn::make('issued_at')->label(__('filament-billing::filament-billing.columns.issued_at'))->date()->sortable()->toggleable(),
                 TextColumn::make('total_amount')->label(__('filament-billing::filament-billing.columns.total'))->formatStateUsing(static fn ($state, Invoice $record): string => number_format((float) $state, 2, ',', ' ').' '.($record->currency ?? 'EUR')),
             ])
@@ -37,10 +37,10 @@ final class InvoicesRelationManagerTable
             ->recordActions([
                 ViewAction::make()
                     ->label(__('filament-billing::filament-billing.actions.view'))
-                    ->url(fn (Invoice $record): string => InvoiceResource::getUrl('view', ['record' => $record])),
+                    ->url(fn (Invoice $record): string => InvoiceResource::getUrl('view', ['record' => $record->getRouteKey()])),
                 EditAction::make()
                     ->label(__('filament-billing::filament-billing.actions.edit'))
-                    ->url(fn (Invoice $record): string => InvoiceResource::getUrl('edit', ['record' => $record]))
+                    ->url(fn (Invoice $record): string => InvoiceResource::getUrl('edit', ['record' => $record->getRouteKey()]))
                     ->visible(fn (Invoice $record): bool => self::canEdit($record)),
                 DeleteAction::make()
                     ->label(__('filament-billing::filament-billing.actions.delete'))

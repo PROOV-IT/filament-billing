@@ -15,10 +15,10 @@ final class CustomerFormSchema
     public static function make(Schema $schema): Schema
     {
         return $schema->components([
-            Section::make('Customer details')
+            Section::make(__('filament-billing::filament-billing.sections.customer_details'))
                 ->schema([
                     Select::make('company_id')
-                        ->label('Company')
+                        ->label(__('filament-billing::filament-billing.resources.company.singular'))
                         ->relationship('company', 'legal_name')
                         ->searchable()
                         ->preload()
@@ -31,8 +31,8 @@ final class CustomerFormSchema
                     TextInput::make('vat_number')->maxLength(64),
                 ])
                 ->columns(2),
-            AddressSchema::make('billing_address', 'Billing address'),
-            AddressSchema::make('shipping_address', 'Shipping address'),
+            AddressSchema::make('billing_address', __('filament-billing::filament-billing.columns.billing_address')),
+            AddressSchema::make('shipping_address', __('filament-billing::filament-billing.sections.address')),
         ]);
     }
 }

@@ -14,16 +14,16 @@ final class LinesRelationManagerFormSchema
     public static function make(Schema $schema): Schema
     {
         return $schema->components([
-            Section::make('Line item')
+            Section::make(__('filament-billing::filament-billing.sections.line_item'))
                 ->schema([
                     TextInput::make('sort_order')->numeric()->default(0)->required(),
                     Select::make('product_id')
-                        ->label('Product')
+                        ->label(__('filament-billing::filament-billing.columns.product'))
                         ->relationship('product', 'name')
                         ->searchable()
                         ->preload(),
                     Select::make('tax_rate_id')
-                        ->label('Tax rate')
+                        ->label(__('filament-billing::filament-billing.resources.tax_rate.singular'))
                         ->relationship('taxRate', 'name')
                         ->searchable()
                         ->preload(),

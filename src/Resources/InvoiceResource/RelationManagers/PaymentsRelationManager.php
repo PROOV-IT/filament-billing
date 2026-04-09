@@ -12,6 +12,7 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use Proovit\Billing\Enums\PaymentMethodType;
 use Proovit\Billing\Enums\PaymentStatus;
 use Proovit\FilamentBilling\Support\Filament\EnumOptions;
@@ -22,21 +23,26 @@ final class PaymentsRelationManager extends RelationManager
 
     protected static ?string $recordTitleAttribute = 'reference';
 
-    protected static ?string $title = 'Payments';
+    protected static ?string $title = null;
+
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
+    {
+        return __('filament-billing::filament-billing.resources.payment.plural');
+    }
 
     public function form(Schema $schema): Schema
     {
         return $schema->components([
-            Section::make('Payment')
+            Section::make(__('filament-billing::filament-billing.sections.payment'))
                 ->schema([
                     Select::make('company_id')
-                        ->label('Company')
+                        ->label(__('filament-billing::filament-billing.resources.company.singular'))
                         ->relationship('company', 'legal_name')
                         ->searchable()
                         ->preload()
                         ->required(),
                     Select::make('customer_id')
-                        ->label('Customer')
+                        ->label(__('filament-billing::filament-billing.resources.customer.singular'))
                         ->relationship('customer', 'legal_name')
                         ->searchable()
                         ->preload(),
@@ -58,11 +64,11 @@ final class PaymentsRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                TextColumn::make('reference')->label('Reference')->searchable()->toggleable(),
-                TextColumn::make('status')->label('Status')->badge(),
-                TextColumn::make('method')->label('Method')->badge()->toggleable(),
-                TextColumn::make('amount')->label('Amount'),
-                TextColumn::make('paid_at')->label('Paid at')->date()->toggleable(),
+                TextColumn::make('reference')->label(__('filament-billing::filament-billing.columns.reference'))->searchable()->toggleable(),
+                TextColumn::make('status')->label(__('filament-billing::filament-billing.columns.status'))->badge(),
+                TextColumn::make('method')->label(__('filament-billing::filament-billing.columns.type'))->badge()->toggleable(),
+                TextColumn::make('amount')->label(__('filament-billing::filament-billing.columns.total')),
+                TextColumn::make('paid_at')->label(__('filament-billing::filament-billing.columns.paid_at'))->date()->toggleable(),
             ])
             ->defaultSort('created_at', 'desc');
     }

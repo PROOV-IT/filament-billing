@@ -13,11 +13,11 @@ final class PaymentsRelationManagerTable
     {
         return $table
             ->columns([
-                TextColumn::make('reference')->label('Reference')->searchable()->toggleable(),
-                TextColumn::make('status')->label('Status')->badge(),
-                TextColumn::make('method')->label('Method')->badge()->toggleable(),
-                TextColumn::make('amount')->label('Amount'),
-                TextColumn::make('paid_at')->label('Paid at')->date()->toggleable(),
+                TextColumn::make('reference')->label(__('filament-billing::filament-billing.columns.reference'))->searchable()->toggleable(),
+                TextColumn::make('status')->label(__('filament-billing::filament-billing.columns.status'))->badge(),
+                TextColumn::make('method')->label(__('filament-billing::filament-billing.columns.type'))->badge()->toggleable(),
+                TextColumn::make('amount')->label(__('filament-billing::filament-billing.columns.total')),
+                TextColumn::make('paid_at')->label(__('filament-billing::filament-billing.columns.paid_at'))->date()->toggleable(),
             ])
             ->defaultSort('created_at', 'desc');
     }

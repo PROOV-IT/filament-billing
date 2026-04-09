@@ -13,8 +13,8 @@ final class AllocationsRelationManagerTable
     {
         return $table
             ->columns([
-                TextColumn::make('invoice.number')->label('Invoice')->searchable()->sortable(),
-                TextColumn::make('amount')->label('Amount'),
+                TextColumn::make('invoice.number')->label(__('filament-billing::filament-billing.resources.invoice.singular'))->searchable()->sortable(),
+                TextColumn::make('amount')->label(__('filament-billing::filament-billing.columns.total')),
             ])
             ->defaultSort('created_at', 'desc');
     }

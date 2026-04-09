@@ -13,12 +13,12 @@ final class PaymentTable
     {
         return $table
             ->columns([
-                TextColumn::make('invoice.number')->label('Invoice')->searchable()->sortable(),
-                TextColumn::make('customer.legal_name')->label('Customer')->searchable()->toggleable(),
-                TextColumn::make('status')->label('Status')->badge()->formatStateUsing(static fn ($state): string => is_object($state) && method_exists($state, 'label') ? $state->label() : (string) $state),
-                TextColumn::make('method')->label('Method')->badge()->formatStateUsing(static fn ($state): string => is_object($state) && method_exists($state, 'label') ? $state->label() : (string) $state)->toggleable(),
-                TextColumn::make('amount')->label('Amount'),
-                TextColumn::make('paid_at')->label('Paid at')->date()->toggleable(),
+                TextColumn::make('invoice.number')->label(__('filament-billing::filament-billing.resources.invoice.singular'))->searchable()->sortable(),
+                TextColumn::make('customer.legal_name')->label(__('filament-billing::filament-billing.resources.customer.singular'))->searchable()->toggleable(),
+                TextColumn::make('status')->label(__('filament-billing::filament-billing.columns.status'))->badge()->formatStateUsing(static fn ($state): string => is_object($state) && method_exists($state, 'label') ? $state->label() : (string) $state),
+                TextColumn::make('method')->label(__('filament-billing::filament-billing.columns.type'))->badge()->formatStateUsing(static fn ($state): string => is_object($state) && method_exists($state, 'label') ? $state->label() : (string) $state)->toggleable(),
+                TextColumn::make('amount')->label(__('filament-billing::filament-billing.columns.total')),
+                TextColumn::make('paid_at')->label(__('filament-billing::filament-billing.columns.paid_at'))->date()->toggleable(),
             ])
             ->defaultSort('created_at', 'desc');
     }

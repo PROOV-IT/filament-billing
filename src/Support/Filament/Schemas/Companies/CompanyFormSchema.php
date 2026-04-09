@@ -15,7 +15,7 @@ final class CompanyFormSchema
     public static function make(Schema $schema): Schema
     {
         return $schema->components([
-            Section::make('Company details')
+            Section::make(__('filament-billing::filament-billing.sections.company_details'))
                 ->schema([
                     TextInput::make('legal_name')->required()->maxLength(255),
                     TextInput::make('display_name')->maxLength(255),
@@ -45,8 +45,8 @@ final class CompanyFormSchema
                     TextInput::make('invoice_sequence_pattern')->maxLength(255)->default('{prefix}-{year}{month}-{sequence}'),
                 ])
                 ->columns(2),
-            AddressSchema::make('head_office_address', 'Head office address'),
-            AddressSchema::make('billing_address', 'Billing address'),
+            AddressSchema::make('head_office_address', __('filament-billing::filament-billing.columns.head_office_address')),
+            AddressSchema::make('billing_address', __('filament-billing::filament-billing.columns.billing_address')),
         ]);
     }
 }

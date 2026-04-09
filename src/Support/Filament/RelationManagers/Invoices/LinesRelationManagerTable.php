@@ -13,12 +13,12 @@ final class LinesRelationManagerTable
     {
         return $table
             ->columns([
-                TextColumn::make('sort_order')->label('Order')->sortable(),
-                TextColumn::make('product.name')->label('Product')->toggleable(),
-                TextColumn::make('description')->label('Description')->searchable()->sortable(),
-                TextColumn::make('quantity')->label('Qty'),
-                TextColumn::make('unit_price')->label('Unit price'),
-                TextColumn::make('total_amount')->label('Total'),
+                TextColumn::make('sort_order')->label(__('filament-billing::filament-billing.columns.order'))->sortable(),
+                TextColumn::make('product.name')->label(__('filament-billing::filament-billing.columns.product'))->toggleable(),
+                TextColumn::make('description')->label(__('filament-billing::filament-billing.columns.description'))->searchable()->sortable(),
+                TextColumn::make('quantity')->label(__('filament-billing::filament-billing.columns.quantity')),
+                TextColumn::make('unit_price')->label(__('filament-billing::filament-billing.columns.unit_price')),
+                TextColumn::make('total_amount')->label(__('filament-billing::filament-billing.columns.total')),
             ])
             ->defaultSort('sort_order');
     }

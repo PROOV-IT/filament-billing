@@ -13,19 +13,19 @@ final class InvoiceSeriesInfolistSchema
     public static function make(Schema $schema): Schema
     {
         return $schema->components([
-            Section::make('Series details')
+            Section::make(__('filament-billing::filament-billing.sections.series_details'))
                 ->schema([
-                    TextEntry::make('company.legal_name')->label('Company'),
-                    TextEntry::make('establishment.name')->label('Establishment'),
-                    TextEntry::make('document_type')->label('Document type')->formatStateUsing(static fn ($state): string => is_object($state) && method_exists($state, 'label') ? $state->label() : (string) $state),
-                    TextEntry::make('name')->label('Name'),
-                    TextEntry::make('prefix')->label('Prefix'),
-                    TextEntry::make('suffix')->label('Suffix'),
-                    TextEntry::make('pattern')->label('Pattern'),
-                    TextEntry::make('padding')->label('Padding'),
-                    TextEntry::make('reset_policy')->label('Reset policy')->formatStateUsing(static fn ($state): string => is_object($state) && method_exists($state, 'label') ? $state->label() : (string) $state),
-                    TextEntry::make('current_sequence')->label('Current sequence'),
-                    TextEntry::make('is_default')->label('Default')->formatStateUsing(static fn (bool $state): string => $state ? 'Yes' : 'No'),
+                    TextEntry::make('company.legal_name')->label(__('filament-billing::filament-billing.resources.company.singular')),
+                    TextEntry::make('establishment.name')->label(__('filament-billing::filament-billing.sections.establishment')),
+                    TextEntry::make('document_type')->label(__('filament-billing::filament-billing.columns.document_type'))->formatStateUsing(static fn ($state): string => is_object($state) && method_exists($state, 'label') ? $state->label() : (string) $state),
+                    TextEntry::make('name')->label(__('filament-billing::filament-billing.columns.name')),
+                    TextEntry::make('prefix')->label(__('filament-billing::filament-billing.columns.prefix')),
+                    TextEntry::make('suffix')->label(__('filament-billing::filament-billing.columns.suffix')),
+                    TextEntry::make('pattern')->label(__('filament-billing::filament-billing.columns.pattern')),
+                    TextEntry::make('padding')->label(__('filament-billing::filament-billing.columns.padding')),
+                    TextEntry::make('reset_policy')->label(__('filament-billing::filament-billing.columns.type'))->formatStateUsing(static fn ($state): string => is_object($state) && method_exists($state, 'label') ? $state->label() : (string) $state),
+                    TextEntry::make('current_sequence')->label(__('filament-billing::filament-billing.columns.current_sequence')),
+                    TextEntry::make('is_default')->label(__('filament-billing::filament-billing.columns.default'))->formatStateUsing(static fn (bool $state): string => $state ? __('filament-billing::filament-billing.booleans.yes') : __('filament-billing::filament-billing.booleans.no')),
                 ])
                 ->columns(2),
         ]);

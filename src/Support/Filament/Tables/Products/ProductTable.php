@@ -14,12 +14,12 @@ final class ProductTable
     {
         return $table
             ->columns([
-                TextColumn::make('name')->label('Name')->searchable()->sortable(),
-                TextColumn::make('sku')->label('SKU')->searchable()->toggleable(),
-                TextColumn::make('company.legal_name')->label('Company')->searchable()->toggleable(),
-                TextColumn::make('currency')->label('Currency')->badge(),
-                IconColumn::make('is_active')->label('Active')->boolean(),
-                TextColumn::make('created_at')->label('Created')->dateTime()->sortable()->toggleable(),
+                TextColumn::make('name')->label(__('filament-billing::filament-billing.columns.name'))->searchable()->sortable(),
+                TextColumn::make('sku')->label(__('filament-billing::filament-billing.columns.sku'))->searchable()->toggleable(),
+                TextColumn::make('company.legal_name')->label(__('filament-billing::filament-billing.columns.company'))->searchable()->toggleable(),
+                TextColumn::make('currency')->label(__('filament-billing::filament-billing.columns.currency'))->badge(),
+                IconColumn::make('is_active')->label(__('filament-billing::filament-billing.columns.active'))->boolean(),
+                TextColumn::make('created_at')->label(__('filament-billing::filament-billing.columns.created_at'))->dateTime()->sortable()->toggleable(),
             ])
             ->defaultSort('name');
     }

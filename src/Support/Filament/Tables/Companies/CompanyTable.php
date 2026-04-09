@@ -13,14 +13,14 @@ final class CompanyTable
     {
         return $table
             ->columns([
-                TextColumn::make('legal_name')->label('Legal name')->searchable()->sortable(),
-                TextColumn::make('display_name')->label('Display name')->searchable()->toggleable(),
-                TextColumn::make('siren')->label('SIREN')->searchable()->toggleable(),
-                TextColumn::make('default_currency')->label('Currency')->badge(),
-                TextColumn::make('default_locale')->label('Locale')->badge(),
-                TextColumn::make('email')->label('Email')->searchable()->toggleable(),
-                TextColumn::make('phone')->label('Phone')->toggleable(),
-                TextColumn::make('created_at')->label('Created')->dateTime()->sortable()->toggleable(),
+                TextColumn::make('legal_name')->label(__('filament-billing::filament-billing.columns.legal_name'))->searchable()->sortable(),
+                TextColumn::make('display_name')->label(__('filament-billing::filament-billing.columns.display_name'))->searchable()->toggleable(),
+                TextColumn::make('siren')->label(__('filament-billing::filament-billing.columns.siren'))->searchable()->toggleable(),
+                TextColumn::make('default_currency')->label(__('filament-billing::filament-billing.columns.currency'))->badge(),
+                TextColumn::make('default_locale')->label(__('filament-billing::filament-billing.columns.locale'))->badge(),
+                TextColumn::make('email')->label(__('filament-billing::filament-billing.columns.email'))->searchable()->toggleable(),
+                TextColumn::make('phone')->label(__('filament-billing::filament-billing.columns.phone'))->toggleable(),
+                TextColumn::make('created_at')->label(__('filament-billing::filament-billing.columns.created_at'))->dateTime()->sortable()->toggleable(),
             ])
             ->defaultSort('legal_name');
     }

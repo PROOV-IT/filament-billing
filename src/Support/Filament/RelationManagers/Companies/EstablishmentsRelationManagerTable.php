@@ -13,11 +13,11 @@ final class EstablishmentsRelationManagerTable
     {
         return $table
             ->columns([
-                TextColumn::make('name')->label('Name')->searchable()->sortable(),
-                TextColumn::make('code')->label('Code')->toggleable(),
-                TextColumn::make('email')->label('Email')->toggleable(),
-                TextColumn::make('phone')->label('Phone')->toggleable(),
-                TextColumn::make('is_default')->label('Default')->badge(),
+                TextColumn::make('name')->label(__('filament-billing::filament-billing.columns.name'))->searchable()->sortable(),
+                TextColumn::make('code')->label(__('filament-billing::filament-billing.columns.code'))->toggleable(),
+                TextColumn::make('email')->label(__('filament-billing::filament-billing.columns.email'))->toggleable(),
+                TextColumn::make('phone')->label(__('filament-billing::filament-billing.columns.phone'))->toggleable(),
+                TextColumn::make('is_default')->label(__('filament-billing::filament-billing.columns.default'))->badge(),
             ])
             ->defaultSort('name');
     }

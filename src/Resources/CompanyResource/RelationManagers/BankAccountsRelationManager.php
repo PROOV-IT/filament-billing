@@ -7,6 +7,7 @@ namespace Proovit\FilamentBilling\Resources\CompanyResource\RelationManagers;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use Proovit\FilamentBilling\Support\Filament\RelationManagers\Companies\BankAccountsRelationManagerFormSchema;
 use Proovit\FilamentBilling\Support\Filament\RelationManagers\Companies\BankAccountsRelationManagerTable;
 
@@ -16,7 +17,12 @@ final class BankAccountsRelationManager extends RelationManager
 
     protected static ?string $recordTitleAttribute = 'bank_name';
 
-    protected static ?string $title = 'Bank accounts';
+    protected static ?string $title = null;
+
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
+    {
+        return __('filament-billing::filament-billing.sections.bank_account');
+    }
 
     public function form(Schema $schema): Schema
     {

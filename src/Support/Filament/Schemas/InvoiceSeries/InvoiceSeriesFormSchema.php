@@ -18,16 +18,16 @@ final class InvoiceSeriesFormSchema
     public static function make(Schema $schema): Schema
     {
         return $schema->components([
-            Section::make('Series details')
+            Section::make(__('filament-billing::filament-billing.sections.series_details'))
                 ->schema([
                     Select::make('company_id')
-                        ->label('Company')
+                        ->label(__('filament-billing::filament-billing.resources.company.singular'))
                         ->relationship('company', 'legal_name')
                         ->searchable()
                         ->preload()
                         ->required(),
                     Select::make('establishment_id')
-                        ->label('Establishment')
+                        ->label(__('filament-billing::filament-billing.sections.establishment'))
                         ->relationship('establishment', 'name')
                         ->searchable()
                         ->preload(),

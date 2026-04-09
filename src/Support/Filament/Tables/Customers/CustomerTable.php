@@ -36,10 +36,10 @@ final class CustomerTable
             ->recordActions([
                 ViewAction::make()
                     ->label(__('filament-billing::filament-billing.actions.view'))
-                    ->url(fn (Customer $record): string => CustomerResource::getUrl('view', ['record' => $record])),
+                    ->url(fn (Customer $record): string => CustomerResource::getUrl('view', ['record' => $record->getRouteKey()])),
                 EditAction::make()
                     ->label(__('filament-billing::filament-billing.actions.edit'))
-                    ->url(fn (Customer $record): string => CustomerResource::getUrl('edit', ['record' => $record]))
+                    ->url(fn (Customer $record): string => CustomerResource::getUrl('edit', ['record' => $record->getRouteKey()]))
                     ->visible(fn (Customer $record): bool => self::canEdit($record)),
                 DeleteAction::make()
                     ->label(__('filament-billing::filament-billing.actions.delete'))

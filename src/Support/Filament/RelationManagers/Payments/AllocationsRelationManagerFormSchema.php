@@ -14,10 +14,10 @@ final class AllocationsRelationManagerFormSchema
     public static function make(Schema $schema): Schema
     {
         return $schema->components([
-            Section::make('Allocation')
+            Section::make(__('filament-billing::filament-billing.sections.allocation'))
                 ->schema([
                     Select::make('invoice_id')
-                        ->label('Invoice')
+                        ->label(__('filament-billing::filament-billing.resources.invoice.singular'))
                         ->relationship('invoice', 'number')
                         ->searchable()
                         ->preload()

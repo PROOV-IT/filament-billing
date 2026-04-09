@@ -13,18 +13,18 @@ final class PaymentInfolistSchema
     public static function make(Schema $schema): Schema
     {
         return $schema->components([
-            Section::make('Payment details')
+            Section::make(__('filament-billing::filament-billing.sections.payment_details'))
                 ->schema([
-                    TextEntry::make('company.legal_name')->label('Company'),
-                    TextEntry::make('customer.legal_name')->label('Customer'),
-                    TextEntry::make('invoice.number')->label('Invoice'),
-                    TextEntry::make('status')->label('Status')->formatStateUsing(static fn ($state): string => is_object($state) && method_exists($state, 'label') ? $state->label() : (string) $state),
-                    TextEntry::make('method')->label('Method')->formatStateUsing(static fn ($state): string => is_object($state) && method_exists($state, 'label') ? $state->label() : (string) $state),
-                    TextEntry::make('currency')->label('Currency'),
-                    TextEntry::make('amount')->label('Amount'),
-                    TextEntry::make('paid_at')->label('Paid at'),
-                    TextEntry::make('reference')->label('Reference'),
-                    TextEntry::make('notes')->label('Notes')->columnSpanFull(),
+                    TextEntry::make('company.legal_name')->label(__('filament-billing::filament-billing.resources.company.singular')),
+                    TextEntry::make('customer.legal_name')->label(__('filament-billing::filament-billing.resources.customer.singular')),
+                    TextEntry::make('invoice.number')->label(__('filament-billing::filament-billing.resources.invoice.singular')),
+                    TextEntry::make('status')->label(__('filament-billing::filament-billing.columns.status'))->formatStateUsing(static fn ($state): string => is_object($state) && method_exists($state, 'label') ? $state->label() : (string) $state),
+                    TextEntry::make('method')->label(__('filament-billing::filament-billing.columns.type'))->formatStateUsing(static fn ($state): string => is_object($state) && method_exists($state, 'label') ? $state->label() : (string) $state),
+                    TextEntry::make('currency')->label(__('filament-billing::filament-billing.columns.currency')),
+                    TextEntry::make('amount')->label(__('filament-billing::filament-billing.columns.total')),
+                    TextEntry::make('paid_at')->label(__('filament-billing::filament-billing.columns.paid_at')),
+                    TextEntry::make('reference')->label(__('filament-billing::filament-billing.columns.reference')),
+                    TextEntry::make('notes')->label(__('filament-billing::filament-billing.columns.notes'))->columnSpanFull(),
                 ])
                 ->columns(2),
         ]);

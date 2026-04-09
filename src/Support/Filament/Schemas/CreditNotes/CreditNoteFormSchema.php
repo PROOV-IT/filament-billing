@@ -16,16 +16,16 @@ final class CreditNoteFormSchema
     public static function make(Schema $schema): Schema
     {
         return $schema->components([
-            Section::make('Credit note details')
+            Section::make(__('filament-billing::filament-billing.sections.credit_note_details'))
                 ->schema([
                     Select::make('company_id')
-                        ->label('Company')
+                        ->label(__('filament-billing::filament-billing.resources.company.singular'))
                         ->relationship('company', 'legal_name')
                         ->searchable()
                         ->preload()
                         ->required(),
                     Select::make('invoice_id')
-                        ->label('Invoice')
+                        ->label(__('filament-billing::filament-billing.resources.invoice.singular'))
                         ->relationship('invoice', 'number')
                         ->searchable()
                         ->preload(),

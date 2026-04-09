@@ -19,21 +19,21 @@ final class PaymentFormSchema
     public static function make(Schema $schema): Schema
     {
         return $schema->components([
-            Section::make('Payment details')
+            Section::make(__('filament-billing::filament-billing.sections.payment_details'))
                 ->schema([
                     Select::make('company_id')
-                        ->label('Company')
+                        ->label(__('filament-billing::filament-billing.resources.company.singular'))
                         ->relationship('company', 'legal_name')
                         ->searchable()
                         ->preload()
                         ->required(),
                     Select::make('customer_id')
-                        ->label('Customer')
+                        ->label(__('filament-billing::filament-billing.resources.customer.singular'))
                         ->relationship('customer', 'legal_name')
                         ->searchable()
                         ->preload(),
                     Select::make('invoice_id')
-                        ->label('Invoice')
+                        ->label(__('filament-billing::filament-billing.resources.invoice.singular'))
                         ->relationship('invoice', 'number')
                         ->searchable()
                         ->preload(),

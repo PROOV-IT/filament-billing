@@ -16,10 +16,10 @@ final class ProductFormSchema
     public static function make(Schema $schema): Schema
     {
         return $schema->components([
-            Section::make('Product details')
+            Section::make(__('filament-billing::filament-billing.resources.product.singular'))
                 ->schema([
                     Select::make('company_id')
-                        ->label('Company')
+                        ->label(__('filament-billing::filament-billing.resources.company.singular'))
                         ->relationship('company', 'legal_name')
                         ->searchable()
                         ->preload(),

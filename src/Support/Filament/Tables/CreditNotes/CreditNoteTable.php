@@ -13,10 +13,10 @@ final class CreditNoteTable
     {
         return $table
             ->columns([
-                TextColumn::make('number')->label('Number')->searchable()->sortable(),
-                TextColumn::make('invoice.number')->label('Invoice')->searchable()->toggleable(),
-                TextColumn::make('status')->label('Status')->badge()->formatStateUsing(static fn ($state): string => is_object($state) && method_exists($state, 'label') ? $state->label() : (string) $state),
-                TextColumn::make('total_amount')->label('Total'),
+                TextColumn::make('number')->label(__('filament-billing::filament-billing.columns.number'))->searchable()->sortable(),
+                TextColumn::make('invoice.number')->label(__('filament-billing::filament-billing.resources.invoice.singular'))->searchable()->toggleable(),
+                TextColumn::make('status')->label(__('filament-billing::filament-billing.columns.status'))->badge()->formatStateUsing(static fn ($state): string => is_object($state) && method_exists($state, 'label') ? $state->label() : (string) $state),
+                TextColumn::make('total_amount')->label(__('filament-billing::filament-billing.columns.total')),
             ])
             ->defaultSort('created_at', 'desc');
     }

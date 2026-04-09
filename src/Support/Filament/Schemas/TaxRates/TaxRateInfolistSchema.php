@@ -13,13 +13,13 @@ final class TaxRateInfolistSchema
     public static function make(Schema $schema): Schema
     {
         return $schema->components([
-            Section::make('Tax rate')
+            Section::make(__('filament-billing::filament-billing.resources.tax_rate.singular'))
                 ->schema([
-                    TextEntry::make('company.legal_name')->label('Company'),
-                    TextEntry::make('name')->label('Name'),
-                    TextEntry::make('rate')->label('Rate'),
-                    TextEntry::make('country')->label('Country'),
-                    TextEntry::make('is_default')->label('Default')->formatStateUsing(static fn (bool $state): string => $state ? 'Yes' : 'No'),
+                    TextEntry::make('company.legal_name')->label(__('filament-billing::filament-billing.resources.company.singular')),
+                    TextEntry::make('name')->label(__('filament-billing::filament-billing.columns.name')),
+                    TextEntry::make('rate')->label(__('filament-billing::filament-billing.columns.rate')),
+                    TextEntry::make('country')->label(__('filament-billing::filament-billing.columns.country')),
+                    TextEntry::make('is_default')->label(__('filament-billing::filament-billing.columns.default'))->formatStateUsing(static fn (bool $state): string => $state ? __('filament-billing::filament-billing.booleans.yes') : __('filament-billing::filament-billing.booleans.no')),
                 ])
                 ->columns(2),
         ]);

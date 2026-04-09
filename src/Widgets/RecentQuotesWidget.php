@@ -13,7 +13,12 @@ use Proovit\FilamentBilling\Resources\QuoteResource;
 
 final class RecentQuotesWidget extends TableWidget
 {
-    protected static ?string $heading = 'Recent quotes';
+    protected static ?string $heading = null;
+
+    public function getHeading(): string
+    {
+        return __('filament-billing::filament-billing.resources.quote.plural');
+    }
 
     public function table(Table $table): Table
     {
@@ -21,20 +26,20 @@ final class RecentQuotesWidget extends TableWidget
             ->query(fn (): Builder => Quote::query()->with('customer')->latest('created_at'))
             ->columns([
                 TextColumn::make('number')
-                    ->label('Number')
+                    ->label(__('filament-billing::filament-billing.columns.number'))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('customer.legal_name')
-                    ->label('Customer')
+                    ->label(__('filament-billing::filament-billing.resources.customer.singular'))
                     ->searchable(),
                 TextColumn::make('status')
                     ->badge()
-                    ->formatStateUsing(static fn ($state): string => is_object($state) && method_exists($state, 'label') ? $state->label() : 'Draft'),
+                    ->formatStateUsing(static fn ($state): string => is_object($state) && method_exists($state, 'label') ? $state->label() : __('filament-billing::filament-billing.statuses.draft')),
                 TextColumn::make('total_amount')
-                    ->label('Total')
+                    ->label(__('filament-billing::filament-billing.columns.total'))
                     ->formatStateUsing(static fn ($state, Quote $record): string => number_format((float) $state, 2, ',', ' ').' '.($record->currency ?? 'EUR')),
             ])
-            ->recordUrl(static fn (Quote $record): string => QuoteResource::getUrl('view', ['record' => $record]))
+            ->recordUrl(static fn (Quote $record): string => QuoteResource::getUrl('view', ['record' => $record->getRouteKey()]))
             ->paginated([5, 10]);
     }
 }

@@ -15,10 +15,10 @@ final class PricesRelationManagerFormSchema
     public static function make(Schema $schema): Schema
     {
         return $schema->components([
-            Section::make('Price')
+            Section::make(__('filament-billing::filament-billing.sections.price'))
                 ->schema([
                     Select::make('tax_rate_id')
-                        ->label('Tax rate')
+                        ->label(__('filament-billing::filament-billing.resources.tax_rate.singular'))
                         ->relationship('taxRate', 'name')
                         ->searchable()
                         ->preload(),

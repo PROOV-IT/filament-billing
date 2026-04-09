@@ -14,19 +14,19 @@ final class CustomerInfolistSchema
     public static function make(Schema $schema): Schema
     {
         return $schema->components([
-            Section::make('Customer details')
+            Section::make(__('filament-billing::filament-billing.sections.customer_details'))
                 ->schema([
-                    TextEntry::make('company.legal_name')->label('Company'),
-                    TextEntry::make('legal_name')->label('Legal name'),
-                    TextEntry::make('full_name')->label('Full name'),
-                    TextEntry::make('reference')->label('Reference'),
-                    TextEntry::make('email')->label('Email'),
-                    TextEntry::make('phone')->label('Phone'),
-                    TextEntry::make('vat_number')->label('VAT number'),
+                    TextEntry::make('company.legal_name')->label(__('filament-billing::filament-billing.resources.company.singular')),
+                    TextEntry::make('legal_name')->label(__('filament-billing::filament-billing.columns.legal_name')),
+                    TextEntry::make('full_name')->label(__('filament-billing::filament-billing.columns.name')),
+                    TextEntry::make('reference')->label(__('filament-billing::filament-billing.columns.reference')),
+                    TextEntry::make('email')->label(__('filament-billing::filament-billing.columns.email')),
+                    TextEntry::make('phone')->label(__('filament-billing::filament-billing.columns.phone')),
+                    TextEntry::make('vat_number')->label(__('filament-billing::filament-billing.columns.vat_number')),
                 ])
                 ->columns(2),
-            AddressInfolist::make('billing_address', 'Billing address'),
-            AddressInfolist::make('shipping_address', 'Shipping address'),
+            AddressInfolist::make('billing_address', __('filament-billing::filament-billing.columns.billing_address')),
+            AddressInfolist::make('shipping_address', __('filament-billing::filament-billing.sections.address')),
         ]);
     }
 }

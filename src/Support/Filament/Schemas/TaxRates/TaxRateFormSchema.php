@@ -15,10 +15,10 @@ final class TaxRateFormSchema
     public static function make(Schema $schema): Schema
     {
         return $schema->components([
-            Section::make('Tax rate')
+            Section::make(__('filament-billing::filament-billing.resources.tax_rate.singular'))
                 ->schema([
                     Select::make('company_id')
-                        ->label('Company')
+                        ->label(__('filament-billing::filament-billing.resources.company.singular'))
                         ->relationship('company', 'legal_name')
                         ->searchable()
                         ->preload(),

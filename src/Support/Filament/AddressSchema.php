@@ -14,22 +14,22 @@ final class AddressSchema
         return Section::make($label)
             ->schema([
                 TextInput::make("{$statePath}.line1")
-                    ->label('Line 1')
+                    ->label(__('filament-billing::filament-billing.columns.line1'))
                     ->maxLength(255),
                 TextInput::make("{$statePath}.line2")
-                    ->label('Line 2')
+                    ->label(__('filament-billing::filament-billing.columns.line2'))
                     ->maxLength(255),
                 TextInput::make("{$statePath}.postal_code")
-                    ->label('Postal code')
+                    ->label(__('filament-billing::filament-billing.columns.postal_code'))
                     ->maxLength(32),
                 TextInput::make("{$statePath}.city")
-                    ->label('City')
+                    ->label(__('filament-billing::filament-billing.columns.city'))
                     ->maxLength(255),
                 TextInput::make("{$statePath}.region")
-                    ->label('Region')
+                    ->label(__('filament-billing::filament-billing.columns.region'))
                     ->maxLength(255),
                 TextInput::make("{$statePath}.country")
-                    ->label('Country')
+                    ->label(__('filament-billing::filament-billing.columns.country'))
                     ->maxLength(2)
                     ->placeholder('FR'),
             ])

@@ -15,10 +15,10 @@ final class BankAccountsRelationManagerFormSchema
     public static function make(Schema $schema): Schema
     {
         return $schema->components([
-            Section::make('Bank account')
+            Section::make(__('filament-billing::filament-billing.sections.bank_account'))
                 ->schema([
                     Select::make('establishment_id')
-                        ->label('Establishment')
+                        ->label(__('filament-billing::filament-billing.sections.establishment'))
                         ->relationship('establishment', 'name')
                         ->searchable()
                         ->preload(),
