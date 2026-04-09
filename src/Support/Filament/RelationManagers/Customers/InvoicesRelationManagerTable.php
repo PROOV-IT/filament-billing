@@ -15,6 +15,7 @@ use Proovit\Billing\Enums\InvoiceStatus;
 use Proovit\Billing\Enums\InvoiceType;
 use Proovit\Billing\Models\Invoice;
 use Proovit\FilamentBilling\Resources\InvoiceResource;
+use Proovit\FilamentBilling\Support\Filament\EnumLabel;
 
 final class InvoicesRelationManagerTable
 {
@@ -23,8 +24,8 @@ final class InvoicesRelationManagerTable
         return $table
             ->columns([
                 TextColumn::make('number')->label(__('filament-billing::filament-billing.columns.number'))->searchable()->sortable(),
-                TextColumn::make('document_type')->label(__('filament-billing::filament-billing.columns.type'))->badge()->formatStateUsing(static fn ($state): string => is_object($state) && method_exists($state, 'label') ? $state->label() : (string) $state),
-                TextColumn::make('status')->label(__('filament-billing::filament-billing.columns.status'))->badge()->formatStateUsing(static fn ($state): string => is_object($state) && method_exists($state, 'label') ? $state->label() : __('filament-billing::filament-billing.statuses.draft')),
+                TextColumn::make('document_type')->label(__('filament-billing::filament-billing.columns.type'))->badge()->formatStateUsing(static fn ($state): string => EnumLabel::make($state)),
+                TextColumn::make('status')->label(__('filament-billing::filament-billing.columns.status'))->badge()->formatStateUsing(static fn ($state): string => EnumLabel::make($state, __('filament-billing::filament-billing.statuses.draft'))),
                 TextColumn::make('issued_at')->label(__('filament-billing::filament-billing.columns.issued_at'))->date()->sortable()->toggleable(),
                 TextColumn::make('total_amount')->label(__('filament-billing::filament-billing.columns.total'))->formatStateUsing(static fn ($state, Invoice $record): string => number_format((float) $state, 2, ',', ' ').' '.($record->currency ?? 'EUR')),
             ])

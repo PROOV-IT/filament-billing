@@ -9,10 +9,13 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Proovit\Billing\Enums\InvoiceStatus;
 use Proovit\Billing\Enums\InvoiceType;
 use Proovit\FilamentBilling\Support\Filament\EnumOptions;
+use Proovit\FilamentBilling\Support\Filament\FormPrefill;
 
 final class InvoiceFormSchema
 {
@@ -26,7 +29,11 @@ final class InvoiceFormSchema
                         ->relationship('company', 'legal_name')
                         ->searchable()
                         ->preload()
-                        ->required(),
+                        ->required()
+                        ->live()
+                        ->afterStateUpdated(function (Set $set, Get $get, mixed $state): void {
+                            FormPrefill::companyDefaults($set, $state);
+                        }),
                     Select::make('establishment_id')
                         ->label(__('filament-billing::filament-billing.sections.establishment'))
                         ->relationship('establishment', 'name')
@@ -36,18 +43,28 @@ final class InvoiceFormSchema
                         ->label(__('filament-billing::filament-billing.resources.customer.singular'))
                         ->relationship('customer', 'legal_name')
                         ->searchable()
-                        ->preload(),
+                        ->preload()
+                        ->live()
+                        ->afterStateUpdated(function (Set $set, Get $get, mixed $state): void {
+                            FormPrefill::customerDefaults($set, $state, 'currency', 'company_id', 'establishment_id');
+                        }),
                     Select::make('invoice_series_id')
                         ->label(__('filament-billing::filament-billing.resources.invoice_series.singular'))
                         ->relationship('series', 'name')
                         ->searchable()
-                        ->preload(),
+                        ->preload()
+                        ->live()
+                        ->afterStateUpdated(function (Set $set, Get $get, mixed $state): void {
+                            FormPrefill::seriesDefaults($set, $state);
+                        }),
                     Select::make('document_type')
                         ->options(EnumOptions::from(InvoiceType::class))
-                        ->required(),
+                        ->required()
+                        ->default(InvoiceType::Invoice->value),
                     Select::make('status')
                         ->options(EnumOptions::from(InvoiceStatus::class))
-                        ->required(),
+                        ->required()
+                        ->default(InvoiceStatus::Draft->value),
                     TextInput::make('number')->maxLength(255),
                     Select::make('currency')
                         ->options([

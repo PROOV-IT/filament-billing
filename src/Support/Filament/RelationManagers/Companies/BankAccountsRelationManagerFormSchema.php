@@ -12,7 +12,7 @@ use Filament\Schemas\Schema;
 
 final class BankAccountsRelationManagerFormSchema
 {
-    public static function make(Schema $schema): Schema
+    public static function make(Schema $schema, ?int $defaultEstablishmentId = null): Schema
     {
         return $schema->components([
             Section::make(__('filament-billing::filament-billing.sections.bank_account'))
@@ -21,7 +21,8 @@ final class BankAccountsRelationManagerFormSchema
                         ->label(__('filament-billing::filament-billing.sections.establishment'))
                         ->relationship('establishment', 'name')
                         ->searchable()
-                        ->preload(),
+                        ->preload()
+                        ->default($defaultEstablishmentId),
                     TextInput::make('bank_name')->required()->maxLength(255),
                     TextInput::make('account_holder')->required()->maxLength(255),
                     TextInput::make('iban')->maxLength(34),

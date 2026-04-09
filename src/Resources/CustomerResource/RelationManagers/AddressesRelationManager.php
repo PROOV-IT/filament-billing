@@ -8,6 +8,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Proovit\Billing\Models\Customer;
 use Proovit\FilamentBilling\Support\Filament\RelationManagers\Customers\AddressesRelationManagerFormSchema;
 use Proovit\FilamentBilling\Support\Filament\RelationManagers\Customers\AddressesRelationManagerTable;
 
@@ -26,7 +27,14 @@ final class AddressesRelationManager extends RelationManager
 
     public function form(Schema $schema): Schema
     {
-        return AddressesRelationManagerFormSchema::make($schema);
+        $ownerRecord = $this->getOwnerRecord();
+        $defaultCountry = null;
+
+        if ($ownerRecord instanceof Customer && $ownerRecord->company) {
+            $defaultCountry = (string) ($ownerRecord->company->getAttribute('registration_country') ?? 'FR');
+        }
+
+        return AddressesRelationManagerFormSchema::make($schema, $defaultCountry, 'billing');
     }
 
     public function table(Table $table): Table

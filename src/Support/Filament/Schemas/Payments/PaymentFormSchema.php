@@ -9,10 +9,13 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Proovit\Billing\Enums\PaymentMethodType;
 use Proovit\Billing\Enums\PaymentStatus;
 use Proovit\FilamentBilling\Support\Filament\EnumOptions;
+use Proovit\FilamentBilling\Support\Filament\FormPrefill;
 
 final class PaymentFormSchema
 {
@@ -26,20 +29,33 @@ final class PaymentFormSchema
                         ->relationship('company', 'legal_name')
                         ->searchable()
                         ->preload()
-                        ->required(),
+                        ->required()
+                        ->live()
+                        ->afterStateUpdated(function (Set $set, Get $get, mixed $state): void {
+                            FormPrefill::companyCurrency($set, $state);
+                        }),
                     Select::make('customer_id')
                         ->label(__('filament-billing::filament-billing.resources.customer.singular'))
                         ->relationship('customer', 'legal_name')
                         ->searchable()
-                        ->preload(),
+                        ->preload()
+                        ->live()
+                        ->afterStateUpdated(function (Set $set, Get $get, mixed $state): void {
+                            FormPrefill::customerDefaults($set, $state);
+                        }),
                     Select::make('invoice_id')
                         ->label(__('filament-billing::filament-billing.resources.invoice.singular'))
                         ->relationship('invoice', 'number')
                         ->searchable()
-                        ->preload(),
+                        ->preload()
+                        ->live()
+                        ->afterStateUpdated(function (Set $set, Get $get, mixed $state): void {
+                            FormPrefill::paymentFromInvoice($set, $state);
+                        }),
                     Select::make('status')
                         ->options(EnumOptions::from(PaymentStatus::class))
-                        ->required(),
+                        ->required()
+                        ->default(PaymentStatus::Pending->value),
                     Select::make('method')
                         ->options(EnumOptions::from(PaymentMethodType::class)),
                     TextInput::make('currency')->maxLength(3)->default('EUR'),

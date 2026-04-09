@@ -26,7 +26,10 @@ final class EstablishmentsRelationManager extends RelationManager
 
     public function form(Schema $schema): Schema
     {
-        return EstablishmentsRelationManagerFormSchema::make($schema);
+        $ownerRecord = $this->getOwnerRecord();
+        $defaultCountry = (string) ($ownerRecord->getAttribute('registration_country') ?? 'FR');
+
+        return EstablishmentsRelationManagerFormSchema::make($schema, $defaultCountry);
     }
 
     public function table(Table $table): Table

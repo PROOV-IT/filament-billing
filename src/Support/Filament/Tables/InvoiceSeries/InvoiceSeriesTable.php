@@ -6,6 +6,7 @@ namespace Proovit\FilamentBilling\Support\Filament\Tables\InvoiceSeries;
 
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Proovit\FilamentBilling\Support\Filament\EnumLabel;
 
 final class InvoiceSeriesTable
 {
@@ -14,7 +15,7 @@ final class InvoiceSeriesTable
         return $table
             ->columns([
                 TextColumn::make('name')->label(__('filament-billing::filament-billing.columns.name'))->searchable()->sortable(),
-                TextColumn::make('document_type')->label(__('filament-billing::filament-billing.columns.document_type'))->badge()->formatStateUsing(static fn ($state): string => is_object($state) && method_exists($state, 'label') ? $state->label() : (string) $state),
+                TextColumn::make('document_type')->label(__('filament-billing::filament-billing.columns.document_type'))->badge()->formatStateUsing(static fn ($state): string => EnumLabel::make($state)),
                 TextColumn::make('company.legal_name')->label(__('filament-billing::filament-billing.columns.company'))->searchable()->toggleable(),
                 TextColumn::make('establishment.name')->label(__('filament-billing::filament-billing.sections.establishment'))->toggleable(),
                 TextColumn::make('pattern')->label(__('filament-billing::filament-billing.columns.pattern'))->toggleable(),

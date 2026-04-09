@@ -15,6 +15,8 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Proovit\Billing\Enums\PaymentMethodType;
 use Proovit\Billing\Enums\PaymentStatus;
+use Proovit\Billing\Models\Invoice;
+use Proovit\FilamentBilling\Support\Filament\EnumLabel;
 use Proovit\FilamentBilling\Support\Filament\EnumOptions;
 
 final class PaymentsRelationManager extends RelationManager
@@ -32,6 +34,18 @@ final class PaymentsRelationManager extends RelationManager
 
     public function form(Schema $schema): Schema
     {
+        $ownerRecord = $this->getOwnerRecord();
+
+        if (! $ownerRecord instanceof Invoice) {
+            return $schema;
+        }
+
+        $defaultCompanyId = $ownerRecord->company?->getKey();
+        $defaultCustomerId = $ownerRecord->customer?->getKey();
+        $defaultCurrency = (string) ($ownerRecord->currency ?? 'EUR');
+        $paidAmount = (float) $ownerRecord->payments()->sum('amount');
+        $defaultAmount = number_format(max(0, (float) ($ownerRecord->total_amount ?? 0) - $paidAmount), 2, '.', '');
+
         return $schema->components([
             Section::make(__('filament-billing::filament-billing.sections.payment'))
                 ->schema([
@@ -40,19 +54,21 @@ final class PaymentsRelationManager extends RelationManager
                         ->relationship('company', 'legal_name')
                         ->searchable()
                         ->preload()
-                        ->required(),
+                        ->required()
+                        ->default($defaultCompanyId),
                     Select::make('customer_id')
                         ->label(__('filament-billing::filament-billing.resources.customer.singular'))
                         ->relationship('customer', 'legal_name')
                         ->searchable()
-                        ->preload(),
+                        ->preload()
+                        ->default($defaultCustomerId),
                     Select::make('status')
                         ->options(EnumOptions::from(PaymentStatus::class))
                         ->required(),
                     Select::make('method')
                         ->options(EnumOptions::from(PaymentMethodType::class)),
-                    TextInput::make('currency')->maxLength(3)->default('EUR'),
-                    TextInput::make('amount')->numeric()->required(),
+                    TextInput::make('currency')->maxLength(3)->default($defaultCurrency),
+                    TextInput::make('amount')->numeric()->required()->default($defaultAmount),
                     DatePicker::make('paid_at'),
                     TextInput::make('reference')->maxLength(255),
                 ])
@@ -65,8 +81,8 @@ final class PaymentsRelationManager extends RelationManager
         return $table
             ->columns([
                 TextColumn::make('reference')->label(__('filament-billing::filament-billing.columns.reference'))->searchable()->toggleable(),
-                TextColumn::make('status')->label(__('filament-billing::filament-billing.columns.status'))->badge(),
-                TextColumn::make('method')->label(__('filament-billing::filament-billing.columns.type'))->badge()->toggleable(),
+                TextColumn::make('status')->label(__('filament-billing::filament-billing.columns.status'))->badge()->formatStateUsing(static fn ($state): string => EnumLabel::make($state)),
+                TextColumn::make('method')->label(__('filament-billing::filament-billing.columns.type'))->badge()->formatStateUsing(static fn ($state): string => EnumLabel::make($state))->toggleable(),
                 TextColumn::make('amount')->label(__('filament-billing::filament-billing.columns.total')),
                 TextColumn::make('paid_at')->label(__('filament-billing::filament-billing.columns.paid_at'))->date()->toggleable(),
             ])

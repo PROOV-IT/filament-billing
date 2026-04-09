@@ -8,6 +8,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Proovit\Billing\Models\Product;
 use Proovit\FilamentBilling\Support\Filament\RelationManagers\Products\PricesRelationManagerFormSchema;
 use Proovit\FilamentBilling\Support\Filament\RelationManagers\Products\PricesRelationManagerTable;
 
@@ -26,7 +27,16 @@ final class PricesRelationManager extends RelationManager
 
     public function form(Schema $schema): Schema
     {
-        return PricesRelationManagerFormSchema::make($schema);
+        $ownerRecord = $this->getOwnerRecord();
+        $defaultCurrency = null;
+
+        if ($ownerRecord instanceof Product && $ownerRecord->company) {
+            $defaultCurrency = (string) ($ownerRecord->company->getAttribute('default_currency') ?? 'EUR');
+        } elseif ($ownerRecord instanceof Product) {
+            $defaultCurrency = (string) ($ownerRecord->getAttribute('default_currency') ?? 'EUR');
+        }
+
+        return PricesRelationManagerFormSchema::make($schema, $defaultCurrency);
     }
 
     public function table(Table $table): Table

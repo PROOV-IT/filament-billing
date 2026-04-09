@@ -8,6 +8,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Proovit\Billing\Models\Company;
 use Proovit\FilamentBilling\Support\Filament\RelationManagers\Companies\BankAccountsRelationManagerFormSchema;
 use Proovit\FilamentBilling\Support\Filament\RelationManagers\Companies\BankAccountsRelationManagerTable;
 
@@ -26,7 +27,14 @@ final class BankAccountsRelationManager extends RelationManager
 
     public function form(Schema $schema): Schema
     {
-        return BankAccountsRelationManagerFormSchema::make($schema);
+        $ownerRecord = $this->getOwnerRecord();
+        if (! $ownerRecord instanceof Company) {
+            return BankAccountsRelationManagerFormSchema::make($schema);
+        }
+
+        $defaultEstablishmentId = $ownerRecord->defaultEstablishment()->value('id');
+
+        return BankAccountsRelationManagerFormSchema::make($schema, $defaultEstablishmentId ? (int) $defaultEstablishmentId : null);
     }
 
     public function table(Table $table): Table

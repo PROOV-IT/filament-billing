@@ -11,7 +11,7 @@ use Filament\Schemas\Schema;
 
 final class EstablishmentsRelationManagerFormSchema
 {
-    public static function make(Schema $schema): Schema
+    public static function make(Schema $schema, ?string $defaultCountry = null): Schema
     {
         return $schema->components([
             Section::make(__('filament-billing::filament-billing.sections.establishment'))
@@ -26,7 +26,10 @@ final class EstablishmentsRelationManagerFormSchema
                     TextInput::make('address.postal_code')->label(__('filament-billing::filament-billing.columns.postal_code'))->maxLength(32),
                     TextInput::make('address.city')->label(__('filament-billing::filament-billing.columns.city'))->maxLength(255),
                     TextInput::make('address.region')->label(__('filament-billing::filament-billing.columns.region'))->maxLength(255),
-                    TextInput::make('address.country')->label(__('filament-billing::filament-billing.columns.country'))->maxLength(2),
+                    TextInput::make('address.country')
+                        ->label(__('filament-billing::filament-billing.columns.country'))
+                        ->maxLength(2)
+                        ->default($defaultCountry ?? 'FR'),
                 ])
                 ->columns(2),
         ]);

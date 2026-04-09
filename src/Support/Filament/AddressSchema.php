@@ -6,6 +6,8 @@ namespace Proovit\FilamentBilling\Support\Filament;
 
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
+use Proovit\Billing\Models\Company;
 
 final class AddressSchema
 {
@@ -31,6 +33,29 @@ final class AddressSchema
                 TextInput::make("{$statePath}.country")
                     ->label(__('filament-billing::filament-billing.columns.country'))
                     ->maxLength(2)
+                    ->default(static function (Get $get): string {
+                        $country = $get('registration_country');
+
+                        if (filled($country)) {
+                            return (string) $country;
+                        }
+
+                        $companyId = $get('company_id');
+
+                        if (filled($companyId)) {
+                            $company = Company::query()->find($companyId);
+
+                            if ($company instanceof Company) {
+                                $country = $company->getAttribute('registration_country');
+
+                                if (filled($country)) {
+                                    return (string) $country;
+                                }
+                            }
+                        }
+
+                        return 'FR';
+                    })
                     ->placeholder('FR'),
             ])
             ->columns(2);

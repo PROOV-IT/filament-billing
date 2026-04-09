@@ -12,7 +12,7 @@ use Filament\Schemas\Schema;
 
 final class PricesRelationManagerFormSchema
 {
-    public static function make(Schema $schema): Schema
+    public static function make(Schema $schema, ?string $defaultCurrency = null): Schema
     {
         return $schema->components([
             Section::make(__('filament-billing::filament-billing.sections.price'))
@@ -22,7 +22,7 @@ final class PricesRelationManagerFormSchema
                         ->relationship('taxRate', 'name')
                         ->searchable()
                         ->preload(),
-                    TextInput::make('currency')->maxLength(3)->default('EUR')->required(),
+                    TextInput::make('currency')->maxLength(3)->default($defaultCurrency ?? 'EUR')->required(),
                     TextInput::make('amount')->numeric()->required(),
                     DatePicker::make('starts_at'),
                     DatePicker::make('ends_at'),

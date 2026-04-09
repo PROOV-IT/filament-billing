@@ -15,6 +15,7 @@ use Proovit\Billing\Actions\Quotes\ConvertQuoteToInvoiceAction;
 use Proovit\Billing\Enums\QuoteStatus;
 use Proovit\Billing\Models\Quote;
 use Proovit\FilamentBilling\Resources\QuoteResource;
+use Proovit\FilamentBilling\Support\Filament\EnumLabel;
 
 final class QuoteTable
 {
@@ -24,7 +25,7 @@ final class QuoteTable
             ->columns([
                 TextColumn::make('number')->label(__('filament-billing::filament-billing.columns.number'))->searchable()->sortable(),
                 TextColumn::make('customer.legal_name')->label(__('filament-billing::filament-billing.columns.customer'))->searchable()->sortable(),
-                TextColumn::make('status')->label(__('filament-billing::filament-billing.columns.status'))->badge()->formatStateUsing(static fn ($state): string => is_object($state) && method_exists($state, 'label') ? $state->label() : __('filament-billing::filament-billing.statuses.draft')),
+                TextColumn::make('status')->label(__('filament-billing::filament-billing.columns.status'))->badge()->formatStateUsing(static fn ($state): string => EnumLabel::make($state, __('filament-billing::filament-billing.statuses.draft'))),
                 TextColumn::make('issued_at')->label(__('filament-billing::filament-billing.columns.issued_at'))->date()->sortable()->toggleable(),
                 TextColumn::make('total_amount')->label(__('filament-billing::filament-billing.columns.total'))->formatStateUsing(static fn ($state, Quote $record): string => number_format((float) $state, 2, ',', ' ').' '.($record->currency ?? 'EUR')),
             ])
