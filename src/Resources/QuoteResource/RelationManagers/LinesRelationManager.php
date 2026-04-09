@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Proovit\FilamentBilling\Resources\QuoteResource\RelationManagers;
 
+use BackedEnum;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
@@ -44,7 +45,7 @@ final class LinesRelationManager extends RelationManager
     private static function canManageLineItems(Quote $quote): bool
     {
         $status = $quote->getAttribute('status');
-        $statusValue = is_object($status) && method_exists($status, 'value') ? $status->value : (string) $status;
+        $statusValue = $status instanceof BackedEnum ? $status->value : (string) $status;
 
         return $quote->getAttribute('converted_invoice_id') === null
             && in_array($statusValue, ['draft', 'sent'], true);

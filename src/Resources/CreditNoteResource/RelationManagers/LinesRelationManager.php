@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Proovit\FilamentBilling\Resources\CreditNoteResource\RelationManagers;
 
+use BackedEnum;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
@@ -44,7 +45,7 @@ final class LinesRelationManager extends RelationManager
     private static function canManageLineItems(CreditNote $creditNote): bool
     {
         $status = $creditNote->getAttribute('status');
-        $statusValue = is_object($status) && method_exists($status, 'value') ? $status->value : (string) $status;
+        $statusValue = $status instanceof BackedEnum ? $status->value : (string) $status;
 
         return $statusValue === 'draft';
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Proovit\FilamentBilling\Resources\InvoiceResource\RelationManagers;
 
+use BackedEnum;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
@@ -57,8 +58,8 @@ final class LinesRelationManager extends RelationManager
         $documentType = $invoice->getAttribute('document_type');
         $status = $invoice->getAttribute('status');
 
-        $documentTypeValue = is_object($documentType) && method_exists($documentType, 'value') ? $documentType->value : (string) $documentType;
-        $statusValue = is_object($status) && method_exists($status, 'value') ? $status->value : (string) $status;
+        $documentTypeValue = $documentType instanceof BackedEnum ? $documentType->value : (string) $documentType;
+        $statusValue = $status instanceof BackedEnum ? $status->value : (string) $status;
 
         return $documentTypeValue === 'invoice' && $statusValue === 'draft';
     }
