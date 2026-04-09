@@ -16,14 +16,25 @@ final class BillingOverviewMetrics
     /**
      * @return array{
      *     stats: array<int, array{label: string, value: string, hint: string}>,
-     *     recent_invoices: array<int, array<string, string|null>>
+     *     recent_invoices: array<int, array<string, string|null>>,
+     *     recent_quotes: array<int, array<string, string|null>>
      * }
      */
     public function make(): array
     {
-        $recentLimit = (int) config('filament-billing.dashboard.recent_invoices_limit', 5);
+        return [
+            'stats' => $this->stats(),
+            'recent_invoices' => $this->recentInvoices(),
+            'recent_quotes' => $this->recentQuotes(),
+        ];
+    }
 
-        $stats = [
+    /**
+     * @return array<int, array{label: string, value: string, hint: string}>
+     */
+    public function stats(): array
+    {
+        return [
             [
                 'label' => 'Companies',
                 'value' => (string) Company::query()->count(),
@@ -50,8 +61,16 @@ final class BillingOverviewMetrics
                 'hint' => 'Tracked payments and allocations.',
             ],
         ];
+    }
 
-        $recentInvoices = Collection::make(
+    /**
+     * @return array<int, array<string, string|null>>
+     */
+    public function recentInvoices(): array
+    {
+        $recentLimit = (int) config('filament-billing.dashboard.recent_invoices_limit', 5);
+
+        return Collection::make(
             Invoice::query()
                 ->with(['customer', 'quote'])
                 ->latest('created_at')
@@ -71,10 +90,32 @@ final class BillingOverviewMetrics
                 'total' => number_format((float) $invoice->total_amount, 2, ',', ' ').' '.($invoice->currency ?? 'EUR'),
             ];
         })->all();
+    }
 
-        return [
-            'stats' => $stats,
-            'recent_invoices' => $recentInvoices,
-        ];
+    /**
+     * @return array<int, array<string, string|null>>
+     */
+    public function recentQuotes(): array
+    {
+        $recentLimit = (int) config('filament-billing.dashboard.recent_quotes_limit', 5);
+
+        return Collection::make(
+            Quote::query()
+                ->with('customer')
+                ->latest('created_at')
+                ->limit($recentLimit)
+                ->get()
+        )->map(static function (Quote $quote): array {
+            $status = $quote->getAttribute('status');
+
+            return [
+                'number' => $quote->number ?? 'Draft',
+                'customer' => data_get($quote, 'customer.legal_name')
+                    ?? data_get($quote, 'customer.full_name')
+                    ?? 'Unknown customer',
+                'status' => $status?->label() ?? 'Draft',
+                'total' => number_format((float) $quote->total_amount, 2, ',', ' ').' '.($quote->currency ?? 'EUR'),
+            ];
+        })->all();
     }
 }

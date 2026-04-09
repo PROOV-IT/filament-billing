@@ -11,5 +11,5 @@ This package adds a Filament 5 panel integration for the ProovIT billing core.
 ## Current scope
 
 - a reusable Filament plugin class
-- a billing overview page
+- native Filament resources and dashboard widgets
 - package discovery and view publishing

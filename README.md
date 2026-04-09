@@ -5,8 +5,9 @@ Filament 5 panel plugin for the ProovIT billing core.
 ## What it provides
 
 - a Filament panel plugin entry point
-- a billing overview page powered by `proovit/laravel-billing`
-- package configuration and publishable views
+- native Filament resources for billing models
+- dashboard widgets powered by `proovit/laravel-billing`
+- package configuration
 
 ## Documentation
 
@@ -46,4 +47,4 @@ When developing against the `dev` branch of this repository, require it explicit
 
 - Requires `proovit/laravel-billing:^1.0`
 - Requires Filament 5
-- The initial release focuses on the billing overview entry point; more resources can be added later without breaking the plugin contract
+- The package is organized around native Filament resources, relation managers, and widgets instead of custom Blade screens

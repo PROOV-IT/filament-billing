@@ -15,14 +15,8 @@ final class FilamentBillingServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'filament-billing');
-
         $this->publishes([
             __DIR__.'/../config/filament-billing.php' => config_path('filament-billing.php'),
         ], 'filament-billing-config');
-
-        $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/filament-billing'),
-        ], 'filament-billing-views');
     }
 }
