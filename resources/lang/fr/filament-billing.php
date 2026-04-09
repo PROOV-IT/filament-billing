@@ -52,6 +52,7 @@ return [
         'generate_share_link' => 'Générer le lien public',
         'revoke_share_link' => 'Révoquer le lien public',
         'regenerate_pdf' => 'Régénérer le PDF',
+        'download_pdf' => 'Télécharger le PDF',
         'convert_to_invoice' => 'Convertir en facture',
         'credit_note' => 'Avoir',
     ],

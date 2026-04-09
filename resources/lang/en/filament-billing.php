@@ -52,6 +52,7 @@ return [
         'generate_share_link' => 'Generate share link',
         'revoke_share_link' => 'Revoke share link',
         'regenerate_pdf' => 'Regenerate PDF',
+        'download_pdf' => 'Download PDF',
         'convert_to_invoice' => 'Convert to invoice',
         'credit_note' => 'Credit note',
     ],
