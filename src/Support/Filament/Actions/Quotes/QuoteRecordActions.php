@@ -25,7 +25,7 @@ final class QuoteRecordActions
             EditAction::make()
                 ->visible(fn (Quote $record): bool => self::isEditable($record)),
             Action::make('convert_to_invoice')
-                ->label('Convert to invoice')
+                ->label(__('filament-billing::filament-billing.actions.convert_to_invoice'))
                 ->icon('heroicon-o-arrow-right')
                 ->color('success')
                 ->requiresConfirmation()
@@ -34,7 +34,7 @@ final class QuoteRecordActions
                     $invoice = app(ConvertQuoteToInvoiceAction::class)->handle($record);
 
                     Notification::make()
-                        ->title('Quote converted to invoice')
+                        ->title(__('filament-billing::filament-billing.messages.quote_converted'))
                         ->body('Invoice '.$invoice->number.' has been created.')
                         ->success()
                         ->send();

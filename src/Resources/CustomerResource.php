@@ -8,8 +8,12 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Proovit\Billing\Models\Customer;
+use Proovit\FilamentBilling\Resources\CustomerResource\Pages\CreateCustomer;
+use Proovit\FilamentBilling\Resources\CustomerResource\Pages\EditCustomer;
 use Proovit\FilamentBilling\Resources\CustomerResource\Pages\ManageCustomers;
+use Proovit\FilamentBilling\Resources\CustomerResource\Pages\ViewCustomer;
 use Proovit\FilamentBilling\Resources\CustomerResource\RelationManagers\AddressesRelationManager;
+use Proovit\FilamentBilling\Resources\CustomerResource\RelationManagers\InvoicesRelationManager;
 use Proovit\FilamentBilling\Support\Filament\Schemas\Customers\CustomerFormSchema;
 use Proovit\FilamentBilling\Support\Filament\Schemas\Customers\CustomerInfolistSchema;
 use Proovit\FilamentBilling\Support\Filament\Tables\Customers\CustomerTable;
@@ -23,6 +27,16 @@ final class CustomerResource extends Resource
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-user-group';
 
     protected static ?int $navigationSort = 2;
+
+    public static function getModelLabel(): string
+    {
+        return __('filament-billing::filament-billing.resources.customer.singular');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('filament-billing::filament-billing.resources.customer.plural');
+    }
 
     public static function form(Schema $schema): Schema
     {
@@ -41,13 +55,16 @@ final class CustomerResource extends Resource
 
     public static function getNavigationGroup(): string
     {
-        return (string) config('filament-billing.navigation_group', 'Billing');
+        return (string) __('filament-billing::filament-billing.navigation.group');
     }
 
     public static function getPages(): array
     {
         return [
             'index' => ManageCustomers::route('/'),
+            'create' => CreateCustomer::route('/create'),
+            'view' => ViewCustomer::route('/{record}'),
+            'edit' => EditCustomer::route('/{record}/edit'),
         ];
     }
 
@@ -55,6 +72,7 @@ final class CustomerResource extends Resource
     {
         return [
             AddressesRelationManager::class,
+            InvoicesRelationManager::class,
         ];
     }
 }

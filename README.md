@@ -8,6 +8,7 @@ Filament 5 panel plugin for the ProovIT billing core.
 - native Filament resources for billing models
 - dashboard widgets powered by `proovit/laravel-billing`
 - package configuration
+- publishable English and French translations
 
 ## Documentation
 
@@ -51,3 +52,4 @@ When developing against the `dev` branch of this repository, require it explicit
 - Requires Filament 5
 - The package is organized around native Filament resources, relation managers, and widgets instead of custom Blade screens
 - The demo seeder is designed for local testing and panel walkthroughs
+- Most user-facing strings are translatable through `filament-billing-translations`

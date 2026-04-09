@@ -24,6 +24,16 @@ final class PaymentResource extends Resource
 
     protected static ?int $navigationSort = 6;
 
+    public static function getModelLabel(): string
+    {
+        return __('filament-billing::filament-billing.resources.payment.singular');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('filament-billing::filament-billing.resources.payment.plural');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return PaymentFormSchema::make($schema);
@@ -41,7 +51,7 @@ final class PaymentResource extends Resource
 
     public static function getNavigationGroup(): string
     {
-        return (string) config('filament-billing.navigation_group', 'Billing');
+        return (string) __('filament-billing::filament-billing.navigation.group');
     }
 
     public static function getRelations(): array

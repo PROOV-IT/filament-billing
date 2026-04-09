@@ -24,6 +24,16 @@ final class ProductResource extends Resource
 
     protected static ?int $navigationSort = 7;
 
+    public static function getModelLabel(): string
+    {
+        return __('filament-billing::filament-billing.resources.product.singular');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('filament-billing::filament-billing.resources.product.plural');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return ProductFormSchema::make($schema);
@@ -41,7 +51,7 @@ final class ProductResource extends Resource
 
     public static function getNavigationGroup(): string
     {
-        return (string) config('filament-billing.navigation_group', 'Billing');
+        return (string) __('filament-billing::filament-billing.navigation.group');
     }
 
     public static function getPages(): array

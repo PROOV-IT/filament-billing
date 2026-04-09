@@ -29,7 +29,7 @@ final class InvoiceRecordActions
             EditAction::make()
                 ->visible(fn (Invoice $record): bool => self::isEditable($record)),
             Action::make('finalize')
-                ->label('Finalize')
+                ->label(__('filament-billing::filament-billing.actions.finalize'))
                 ->icon('heroicon-o-check-badge')
                 ->color('success')
                 ->requiresConfirmation()
@@ -38,12 +38,12 @@ final class InvoiceRecordActions
                     app(FinalizeInvoiceAction::class)->handle($record);
 
                     Notification::make()
-                        ->title('Invoice finalized')
+                        ->title(__('filament-billing::filament-billing.messages.invoice_finalized'))
                         ->success()
                         ->send();
                 }),
             Action::make('generate_share_link')
-                ->label('Generate share link')
+                ->label(__('filament-billing::filament-billing.actions.generate_share_link'))
                 ->icon('heroicon-o-link')
                 ->color('primary')
                 ->requiresConfirmation()
@@ -52,13 +52,13 @@ final class InvoiceRecordActions
                     $url = app(GenerateInvoiceShareLinkAction::class)->handle($record, regenerate: true);
 
                     Notification::make()
-                        ->title('Public share link ready')
+                        ->title(__('filament-billing::filament-billing.messages.public_share_link_ready'))
                         ->body($url)
                         ->success()
                         ->send();
                 }),
             Action::make('revoke_share_link')
-                ->label('Revoke share link')
+                ->label(__('filament-billing::filament-billing.actions.revoke_share_link'))
                 ->icon('heroicon-o-link-slash')
                 ->color('warning')
                 ->requiresConfirmation()
@@ -67,12 +67,12 @@ final class InvoiceRecordActions
                     app(RevokeInvoiceShareLinkAction::class)->handle($record);
 
                     Notification::make()
-                        ->title('Public share link revoked')
+                        ->title(__('filament-billing::filament-billing.messages.public_share_link_revoked'))
                         ->success()
                         ->send();
                 }),
             Action::make('create_credit_note')
-                ->label('Credit note')
+                ->label(__('filament-billing::filament-billing.actions.credit_note'))
                 ->icon('heroicon-o-document-plus')
                 ->color('warning')
                 ->requiresConfirmation()
@@ -81,7 +81,7 @@ final class InvoiceRecordActions
                     app(CreateCreditNoteFromInvoiceAction::class)->handle($record);
 
                     Notification::make()
-                        ->title('Credit note created')
+                        ->title(__('filament-billing::filament-billing.messages.credit_note_created'))
                         ->success()
                         ->send();
                 }),

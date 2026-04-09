@@ -23,6 +23,16 @@ final class InvoiceSeriesResource extends Resource
 
     protected static ?int $navigationSort = 9;
 
+    public static function getModelLabel(): string
+    {
+        return __('filament-billing::filament-billing.resources.invoice_series.singular');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('filament-billing::filament-billing.resources.invoice_series.plural');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return InvoiceSeriesFormSchema::make($schema);
@@ -40,7 +50,7 @@ final class InvoiceSeriesResource extends Resource
 
     public static function getNavigationGroup(): string
     {
-        return (string) config('filament-billing.navigation_group', 'Billing');
+        return (string) __('filament-billing::filament-billing.navigation.group');
     }
 
     public static function getPages(): array

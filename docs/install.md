@@ -34,6 +34,12 @@ public function panel(Panel $panel): Panel
 php artisan vendor:publish --tag=filament-billing-config
 ```
 
+## Publish translations
+
+```bash
+php artisan vendor:publish --tag=filament-billing-translations
+```
+
 ## Publish views
 
 ```bash
