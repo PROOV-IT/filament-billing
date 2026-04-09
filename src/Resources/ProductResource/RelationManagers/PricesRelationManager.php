@@ -4,14 +4,11 @@ declare(strict_types=1);
 
 namespace Proovit\FilamentBilling\Resources\ProductResource\RelationManagers;
 
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Proovit\FilamentBilling\Support\Filament\RelationManagers\Products\PricesRelationManagerFormSchema;
+use Proovit\FilamentBilling\Support\Filament\RelationManagers\Products\PricesRelationManagerTable;
 
 final class PricesRelationManager extends RelationManager
 {
@@ -23,33 +20,11 @@ final class PricesRelationManager extends RelationManager
 
     public function form(Schema $schema): Schema
     {
-        return $schema->components([
-            Section::make('Price')
-                ->schema([
-                    Select::make('tax_rate_id')
-                        ->label('Tax rate')
-                        ->relationship('taxRate', 'name')
-                        ->searchable()
-                        ->preload(),
-                    TextInput::make('currency')->maxLength(3)->default('EUR')->required(),
-                    TextInput::make('amount')->numeric()->required(),
-                    DatePicker::make('starts_at'),
-                    DatePicker::make('ends_at'),
-                ])
-                ->columns(2),
-        ]);
+        return PricesRelationManagerFormSchema::make($schema);
     }
 
     public function table(Table $table): Table
     {
-        return $table
-            ->columns([
-                TextColumn::make('currency')->badge(),
-                TextColumn::make('amount')->label('Amount'),
-                TextColumn::make('taxRate.name')->label('Tax rate')->toggleable(),
-                TextColumn::make('starts_at')->label('Starts at')->date()->toggleable(),
-                TextColumn::make('ends_at')->label('Ends at')->date()->toggleable(),
-            ])
-            ->defaultSort('starts_at', 'desc');
+        return PricesRelationManagerTable::make($table);
     }
 }

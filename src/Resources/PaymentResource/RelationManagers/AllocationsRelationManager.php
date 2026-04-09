@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace Proovit\FilamentBilling\Resources\PaymentResource\RelationManagers;
 
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Proovit\FilamentBilling\Support\Filament\RelationManagers\Payments\AllocationsRelationManagerFormSchema;
+use Proovit\FilamentBilling\Support\Filament\RelationManagers\Payments\AllocationsRelationManagerTable;
 
 final class AllocationsRelationManager extends RelationManager
 {
@@ -22,28 +20,11 @@ final class AllocationsRelationManager extends RelationManager
 
     public function form(Schema $schema): Schema
     {
-        return $schema->components([
-            Section::make('Allocation')
-                ->schema([
-                    Select::make('invoice_id')
-                        ->label('Invoice')
-                        ->relationship('invoice', 'number')
-                        ->searchable()
-                        ->preload()
-                        ->required(),
-                    TextInput::make('amount')->numeric()->required(),
-                ])
-                ->columns(2),
-        ]);
+        return AllocationsRelationManagerFormSchema::make($schema);
     }
 
     public function table(Table $table): Table
     {
-        return $table
-            ->columns([
-                TextColumn::make('invoice.number')->label('Invoice')->searchable()->sortable(),
-                TextColumn::make('amount')->label('Amount'),
-            ])
-            ->defaultSort('created_at', 'desc');
+        return AllocationsRelationManagerTable::make($table);
     }
 }
