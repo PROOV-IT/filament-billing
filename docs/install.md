@@ -13,6 +13,10 @@
 composer require proovit/filament-billing
 ```
 
+The plugin does not require `php artisan billing:install` to be run first.
+
+You only need the core package installed and configured. If the core package is still using defaults, the plugin will continue to work with those defaults.
+
 ## Register the plugin
 
 Add the plugin to one of your Filament panel providers:
