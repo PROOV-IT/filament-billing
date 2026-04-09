@@ -14,6 +14,7 @@ use Proovit\Billing\Models\Product;
 use Proovit\Billing\Models\ProductPrice;
 use Proovit\Billing\Models\TaxRate;
 use Proovit\Billing\ValueObjects\Money;
+use Proovit\FilamentBilling\Support\Filament\RecordLabel;
 
 final class LinesRelationManagerFormSchema
 {
@@ -26,6 +27,7 @@ final class LinesRelationManagerFormSchema
                     Select::make('product_id')
                         ->label(__('filament-billing::filament-billing.columns.product'))
                         ->relationship('product', 'name')
+                        ->getOptionLabelFromRecordUsing(static fn (Product $record): string => RecordLabel::make($record, ['name', 'sku']))
                         ->searchable()
                         ->preload()
                         ->live()
@@ -36,6 +38,7 @@ final class LinesRelationManagerFormSchema
                     Select::make('tax_rate_id')
                         ->label(__('filament-billing::filament-billing.resources.tax_rate.singular'))
                         ->relationship('taxRate', 'name')
+                        ->getOptionLabelFromRecordUsing(static fn (TaxRate $record): string => RecordLabel::make($record, ['name', 'rate']))
                         ->searchable()
                         ->preload()
                         ->live()

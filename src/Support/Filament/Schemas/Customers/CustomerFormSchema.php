@@ -8,7 +8,9 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Proovit\Billing\Models\Company;
 use Proovit\FilamentBilling\Support\Filament\AddressSchema;
+use Proovit\FilamentBilling\Support\Filament\RecordLabel;
 
 final class CustomerFormSchema
 {
@@ -20,6 +22,7 @@ final class CustomerFormSchema
                     Select::make('company_id')
                         ->label(__('filament-billing::filament-billing.resources.company.singular'))
                         ->relationship('company', 'legal_name')
+                        ->getOptionLabelFromRecordUsing(static fn (Company $record): string => RecordLabel::make($record, ['legal_name', 'display_name', 'name']))
                         ->searchable()
                         ->preload()
                         ->required(),

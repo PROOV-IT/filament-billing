@@ -15,9 +15,12 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Proovit\Billing\Enums\PaymentMethodType;
 use Proovit\Billing\Enums\PaymentStatus;
+use Proovit\Billing\Models\Company;
+use Proovit\Billing\Models\Customer;
 use Proovit\Billing\Models\Invoice;
 use Proovit\FilamentBilling\Support\Filament\EnumLabel;
 use Proovit\FilamentBilling\Support\Filament\EnumOptions;
+use Proovit\FilamentBilling\Support\Filament\RecordLabel;
 
 final class PaymentsRelationManager extends RelationManager
 {
@@ -52,6 +55,7 @@ final class PaymentsRelationManager extends RelationManager
                     Select::make('company_id')
                         ->label(__('filament-billing::filament-billing.resources.company.singular'))
                         ->relationship('company', 'legal_name')
+                        ->getOptionLabelFromRecordUsing(static fn (Company $record): string => RecordLabel::make($record, ['legal_name', 'display_name', 'name']))
                         ->searchable()
                         ->preload()
                         ->required()
@@ -59,6 +63,7 @@ final class PaymentsRelationManager extends RelationManager
                     Select::make('customer_id')
                         ->label(__('filament-billing::filament-billing.resources.customer.singular'))
                         ->relationship('customer', 'legal_name')
+                        ->getOptionLabelFromRecordUsing(static fn (Customer $record): string => RecordLabel::make($record, ['legal_name', 'full_name', 'reference']))
                         ->searchable()
                         ->preload()
                         ->default($defaultCustomerId),

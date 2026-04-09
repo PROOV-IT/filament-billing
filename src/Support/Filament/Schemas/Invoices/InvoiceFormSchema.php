@@ -14,8 +14,13 @@ use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Proovit\Billing\Enums\InvoiceStatus;
 use Proovit\Billing\Enums\InvoiceType;
+use Proovit\Billing\Models\Company;
+use Proovit\Billing\Models\CompanyEstablishment;
+use Proovit\Billing\Models\Customer;
+use Proovit\Billing\Models\InvoiceSeries;
 use Proovit\FilamentBilling\Support\Filament\EnumOptions;
 use Proovit\FilamentBilling\Support\Filament\FormPrefill;
+use Proovit\FilamentBilling\Support\Filament\RecordLabel;
 
 final class InvoiceFormSchema
 {
@@ -27,6 +32,7 @@ final class InvoiceFormSchema
                     Select::make('company_id')
                         ->label(__('filament-billing::filament-billing.resources.company.singular'))
                         ->relationship('company', 'legal_name')
+                        ->getOptionLabelFromRecordUsing(static fn (Company $record): string => RecordLabel::make($record, ['legal_name', 'display_name', 'name']))
                         ->searchable()
                         ->preload()
                         ->required()
@@ -37,11 +43,13 @@ final class InvoiceFormSchema
                     Select::make('establishment_id')
                         ->label(__('filament-billing::filament-billing.sections.establishment'))
                         ->relationship('establishment', 'name')
+                        ->getOptionLabelFromRecordUsing(static fn (CompanyEstablishment $record): string => RecordLabel::make($record, ['name', 'code']))
                         ->searchable()
                         ->preload(),
                     Select::make('customer_id')
                         ->label(__('filament-billing::filament-billing.resources.customer.singular'))
                         ->relationship('customer', 'legal_name')
+                        ->getOptionLabelFromRecordUsing(static fn (Customer $record): string => RecordLabel::make($record, ['legal_name', 'full_name', 'reference']))
                         ->searchable()
                         ->preload()
                         ->live()
@@ -51,6 +59,7 @@ final class InvoiceFormSchema
                     Select::make('invoice_series_id')
                         ->label(__('filament-billing::filament-billing.resources.invoice_series.singular'))
                         ->relationship('series', 'name')
+                        ->getOptionLabelFromRecordUsing(static fn (InvoiceSeries $record): string => RecordLabel::make($record, ['name', 'prefix']))
                         ->searchable()
                         ->preload()
                         ->live()

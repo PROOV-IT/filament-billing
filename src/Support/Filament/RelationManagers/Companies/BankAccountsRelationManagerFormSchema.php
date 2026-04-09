@@ -9,6 +9,8 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Proovit\Billing\Models\CompanyEstablishment;
+use Proovit\FilamentBilling\Support\Filament\RecordLabel;
 
 final class BankAccountsRelationManagerFormSchema
 {
@@ -20,6 +22,7 @@ final class BankAccountsRelationManagerFormSchema
                     Select::make('establishment_id')
                         ->label(__('filament-billing::filament-billing.sections.establishment'))
                         ->relationship('establishment', 'name')
+                        ->getOptionLabelFromRecordUsing(static fn (CompanyEstablishment $record): string => RecordLabel::make($record, ['name', 'code']))
                         ->searchable()
                         ->preload()
                         ->default($defaultEstablishmentId),

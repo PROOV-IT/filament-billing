@@ -14,9 +14,12 @@ use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Proovit\Billing\Enums\PaymentMethodType;
 use Proovit\Billing\Enums\PaymentStatus;
+use Proovit\Billing\Models\Company;
+use Proovit\Billing\Models\Customer;
 use Proovit\Billing\Models\Invoice;
 use Proovit\FilamentBilling\Support\Filament\EnumOptions;
 use Proovit\FilamentBilling\Support\Filament\FormPrefill;
+use Proovit\FilamentBilling\Support\Filament\RecordLabel;
 
 final class PaymentFormSchema
 {
@@ -28,6 +31,7 @@ final class PaymentFormSchema
                     Select::make('company_id')
                         ->label(__('filament-billing::filament-billing.resources.company.singular'))
                         ->relationship('company', 'legal_name')
+                        ->getOptionLabelFromRecordUsing(static fn (Company $record): string => RecordLabel::make($record, ['legal_name', 'display_name', 'name']))
                         ->searchable()
                         ->preload()
                         ->required()
@@ -38,6 +42,7 @@ final class PaymentFormSchema
                     Select::make('customer_id')
                         ->label(__('filament-billing::filament-billing.resources.customer.singular'))
                         ->relationship('customer', 'legal_name')
+                        ->getOptionLabelFromRecordUsing(static fn (Customer $record): string => RecordLabel::make($record, ['legal_name', 'full_name', 'reference']))
                         ->searchable()
                         ->preload()
                         ->live()
@@ -47,7 +52,7 @@ final class PaymentFormSchema
                     Select::make('invoice_id')
                         ->label(__('filament-billing::filament-billing.resources.invoice.singular'))
                         ->relationship('invoice', 'number')
-                        ->getOptionLabelFromRecordUsing(static fn (Invoice $record): string => (string) ($record->getAttribute('number') ?? sprintf('Invoice #%s', $record->getRouteKey())))
+                        ->getOptionLabelFromRecordUsing(static fn (Invoice $record): string => RecordLabel::make($record, ['number']))
                         ->searchable()
                         ->preload()
                         ->live()

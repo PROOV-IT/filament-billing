@@ -13,8 +13,11 @@ use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Proovit\Billing\Enums\InvoiceType;
 use Proovit\Billing\Enums\SequenceResetPolicy;
+use Proovit\Billing\Models\Company;
+use Proovit\Billing\Models\CompanyEstablishment;
 use Proovit\FilamentBilling\Support\Filament\EnumOptions;
 use Proovit\FilamentBilling\Support\Filament\FormPrefill;
+use Proovit\FilamentBilling\Support\Filament\RecordLabel;
 
 final class InvoiceSeriesFormSchema
 {
@@ -26,6 +29,7 @@ final class InvoiceSeriesFormSchema
                     Select::make('company_id')
                         ->label(__('filament-billing::filament-billing.resources.company.singular'))
                         ->relationship('company', 'legal_name')
+                        ->getOptionLabelFromRecordUsing(static fn (Company $record): string => RecordLabel::make($record, ['legal_name', 'display_name', 'name']))
                         ->searchable()
                         ->preload()
                         ->required()
@@ -36,6 +40,7 @@ final class InvoiceSeriesFormSchema
                     Select::make('establishment_id')
                         ->label(__('filament-billing::filament-billing.sections.establishment'))
                         ->relationship('establishment', 'name')
+                        ->getOptionLabelFromRecordUsing(static fn (CompanyEstablishment $record): string => RecordLabel::make($record, ['name', 'code']))
                         ->searchable()
                         ->preload(),
                     Select::make('document_type')
