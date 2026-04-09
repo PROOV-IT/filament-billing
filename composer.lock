@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6f3595c4b6ea94ffce04793af02fc4d4",
+    "content-hash": "0919eeebcda47646de99550745f28430",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -4355,16 +4355,16 @@
         },
         {
             "name": "proovit/laravel-billing",
-            "version": "1.0.4",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PROOV-IT/proovit-laravel-billing.git",
-                "reference": "b8f397cd09961617d41714d00cc60a24dbcaa2dc"
+                "reference": "3a32edd76fa56c5da90be590adf806fea177bdf8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PROOV-IT/proovit-laravel-billing/zipball/b8f397cd09961617d41714d00cc60a24dbcaa2dc",
-                "reference": "b8f397cd09961617d41714d00cc60a24dbcaa2dc",
+                "url": "https://api.github.com/repos/PROOV-IT/proovit-laravel-billing/zipball/3a32edd76fa56c5da90be590adf806fea177bdf8",
+                "reference": "3a32edd76fa56c5da90be590adf806fea177bdf8",
                 "shasum": ""
             },
             "require": {
@@ -4394,20 +4394,43 @@
             "autoload": {
                 "psr-4": {
                     "Proovit\\Billing\\": "src/",
-                    "Proovit\\Billing\\Database\\Seeders\\": "database/seeders/",
-                    "Proovit\\Billing\\Database\\Factories\\": "database/factories/"
+                    "Proovit\\Billing\\Database\\Factories\\": "database/factories/",
+                    "Proovit\\Billing\\Database\\Seeders\\": "database/seeders/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "format": [
+                    "@php vendor/bin/pint src tests"
+                ],
+                "format:test": [
+                    "@php vendor/bin/pint --test src tests"
+                ],
+                "analyse": [
+                    "@php vendor/bin/phpstan analyse --ansi --memory-limit=1G"
+                ],
+                "qa": [
+                    "@format:test",
+                    "@analyse",
+                    "@test"
+                ],
+                "test": [
+                    "@php vendor/bin/pest"
+                ]
+            },
             "license": [
                 "MIT"
             ],
             "description": "Laravel 13 billing package for invoices, quotes, payments, credit notes, public invoice sharing, PDF rendering, and API-driven billing workflows.",
             "support": {
-                "issues": "https://github.com/PROOV-IT/proovit-laravel-billing/issues",
-                "source": "https://github.com/PROOV-IT/proovit-laravel-billing/tree/1.0.4"
+                "source": "https://github.com/PROOV-IT/proovit-laravel-billing/tree/1.0.5",
+                "issues": "https://github.com/PROOV-IT/proovit-laravel-billing/issues"
             },
-            "time": "2026-04-09T09:05:12+00:00"
+            "time": "2026-04-09T13:39:14+00:00"
         },
         {
             "name": "psr/clock",
