@@ -9,10 +9,6 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Infolists\Components\TextEntry;
-use Filament\Resources\Pages\CreateRecord;
-use Filament\Resources\Pages\EditRecord;
-use Filament\Resources\Pages\ListRecords;
-use Filament\Resources\Pages\ViewRecord;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -20,6 +16,7 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Proovit\Billing\Models\Product;
+use Proovit\FilamentBilling\Resources\ProductResource\Pages\ManageProducts;
 use Proovit\FilamentBilling\Resources\ProductResource\RelationManagers\PricesRelationManager;
 
 final class ProductResource extends Resource
@@ -97,10 +94,7 @@ final class ProductResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListRecords::route('/'),
-            'create' => CreateRecord::route('/create'),
-            'view' => ViewRecord::route('/{record}'),
-            'edit' => EditRecord::route('/{record}/edit'),
+            'index' => ManageProducts::route('/'),
         ];
     }
 

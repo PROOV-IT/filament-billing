@@ -7,10 +7,6 @@ namespace Proovit\FilamentBilling\Resources;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\TextEntry;
-use Filament\Resources\Pages\CreateRecord;
-use Filament\Resources\Pages\EditRecord;
-use Filament\Resources\Pages\ListRecords;
-use Filament\Resources\Pages\ViewRecord;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -18,6 +14,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Proovit\Billing\Enums\CreditNoteStatus;
 use Proovit\Billing\Models\CreditNote;
+use Proovit\FilamentBilling\Resources\CreditNoteResource\Pages\ManageCreditNotes;
 use Proovit\FilamentBilling\Resources\CreditNoteResource\RelationManagers\LinesRelationManager;
 use Proovit\FilamentBilling\Support\Filament\EnumOptions;
 
@@ -93,10 +90,7 @@ final class CreditNoteResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListRecords::route('/'),
-            'create' => CreateRecord::route('/create'),
-            'view' => ViewRecord::route('/{record}'),
-            'edit' => EditRecord::route('/{record}/edit'),
+            'index' => ManageCreditNotes::route('/'),
         ];
     }
 

@@ -9,10 +9,6 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\TextEntry;
-use Filament\Resources\Pages\CreateRecord;
-use Filament\Resources\Pages\EditRecord;
-use Filament\Resources\Pages\ListRecords;
-use Filament\Resources\Pages\ViewRecord;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -21,6 +17,7 @@ use Filament\Tables\Table;
 use Proovit\Billing\Enums\PaymentMethodType;
 use Proovit\Billing\Enums\PaymentStatus;
 use Proovit\Billing\Models\Payment;
+use Proovit\FilamentBilling\Resources\PaymentResource\Pages\ManagePayments;
 use Proovit\FilamentBilling\Resources\PaymentResource\RelationManagers\AllocationsRelationManager;
 use Proovit\FilamentBilling\Support\Filament\EnumOptions;
 
@@ -119,10 +116,7 @@ final class PaymentResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListRecords::route('/'),
-            'create' => CreateRecord::route('/create'),
-            'view' => ViewRecord::route('/{record}'),
-            'edit' => EditRecord::route('/{record}/edit'),
+            'index' => ManagePayments::route('/'),
         ];
     }
 }

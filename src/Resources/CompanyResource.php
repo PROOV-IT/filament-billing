@@ -7,16 +7,13 @@ namespace Proovit\FilamentBilling\Resources;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\TextEntry;
-use Filament\Resources\Pages\CreateRecord;
-use Filament\Resources\Pages\EditRecord;
-use Filament\Resources\Pages\ListRecords;
-use Filament\Resources\Pages\ViewRecord;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Proovit\Billing\Models\Company;
+use Proovit\FilamentBilling\Resources\CompanyResource\Pages\ManageCompanies;
 use Proovit\FilamentBilling\Resources\CompanyResource\RelationManagers\BankAccountsRelationManager;
 use Proovit\FilamentBilling\Resources\CompanyResource\RelationManagers\EstablishmentsRelationManager;
 use Proovit\FilamentBilling\Support\Filament\AddressInfolist;
@@ -118,10 +115,7 @@ final class CompanyResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListRecords::route('/'),
-            'create' => CreateRecord::route('/create'),
-            'view' => ViewRecord::route('/{record}'),
-            'edit' => EditRecord::route('/{record}/edit'),
+            'index' => ManageCompanies::route('/'),
         ];
     }
 
