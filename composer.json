@@ -7,7 +7,7 @@
     "require": {
         "php": "^8.3",
         "filament/filament": "^5.0",
-        "proovit/laravel-billing": "dev-dev@dev"
+        "proovit/laravel-billing": "^1.0.4"
     },
   "require-dev": {
     "larastan/larastan": "^3.9.3",

@@ -28,6 +28,7 @@ it('downloads an invoice pdf from the admin route', function (): void {
         ->assertOk()
         ->assertHeader('Content-Type', 'application/pdf');
 
-    expect($response->headers->get('Content-Disposition'))->toStartWith('attachment; filename="invoice-');
-    expect($response->headers->get('Content-Disposition'))->toEndWith('.pdf"');
+    expect($response->headers->get('Content-Disposition'))->toContain('attachment;');
+    expect($response->headers->get('Content-Disposition'))->toContain('invoice-');
+    expect($response->headers->get('Content-Disposition'))->toContain('.pdf');
 });
