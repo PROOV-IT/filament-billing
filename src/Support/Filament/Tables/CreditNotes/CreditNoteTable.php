@@ -15,6 +15,7 @@ final class CreditNoteTable
         return $table
             ->columns([
                 TextColumn::make('number')->label(__('filament-billing::filament-billing.columns.number'))->searchable()->sortable(),
+                TextColumn::make('customer.legal_name')->label(__('filament-billing::filament-billing.columns.customer'))->searchable()->toggleable(),
                 TextColumn::make('invoice.number')->label(__('filament-billing::filament-billing.resources.invoice.singular'))->searchable()->toggleable(),
                 TextColumn::make('status')->label(__('filament-billing::filament-billing.columns.status'))->badge()->formatStateUsing(static fn ($state): string => EnumLabel::make($state, __('filament-billing::filament-billing.statuses.draft'))),
                 TextColumn::make('total_amount')->label(__('filament-billing::filament-billing.columns.total')),

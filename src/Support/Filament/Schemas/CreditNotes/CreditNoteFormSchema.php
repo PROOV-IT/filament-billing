@@ -11,6 +11,7 @@ use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Proovit\Billing\Enums\CreditNoteStatus;
+use Proovit\Billing\Models\Invoice;
 use Proovit\FilamentBilling\Support\Filament\EnumOptions;
 use Proovit\FilamentBilling\Support\Filament\FormPrefill;
 
@@ -34,6 +35,7 @@ final class CreditNoteFormSchema
                     Select::make('invoice_id')
                         ->label(__('filament-billing::filament-billing.resources.invoice.singular'))
                         ->relationship('invoice', 'number')
+                        ->getOptionLabelFromRecordUsing(static fn (Invoice $record): string => (string) ($record->getAttribute('number') ?? sprintf('Invoice #%s', $record->getRouteKey())))
                         ->searchable()
                         ->preload()
                         ->live()

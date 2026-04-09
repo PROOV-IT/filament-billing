@@ -8,6 +8,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Proovit\Billing\Models\Invoice;
 
 final class AllocationsRelationManagerFormSchema
 {
@@ -19,6 +20,7 @@ final class AllocationsRelationManagerFormSchema
                     Select::make('invoice_id')
                         ->label(__('filament-billing::filament-billing.resources.invoice.singular'))
                         ->relationship('invoice', 'number')
+                        ->getOptionLabelFromRecordUsing(static fn (Invoice $record): string => (string) ($record->getAttribute('number') ?? sprintf('Invoice #%s', $record->getRouteKey())))
                         ->searchable()
                         ->preload()
                         ->required(),

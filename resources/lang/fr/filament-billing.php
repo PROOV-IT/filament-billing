@@ -51,6 +51,7 @@ return [
         'finalize' => 'Finaliser',
         'generate_share_link' => 'Générer le lien public',
         'revoke_share_link' => 'Révoquer le lien public',
+        'regenerate_pdf' => 'Régénérer le PDF',
         'convert_to_invoice' => 'Convertir en facture',
         'credit_note' => 'Avoir',
     ],
@@ -96,6 +97,7 @@ return [
         'quantity' => 'Quantité',
         'unit_price' => 'Prix unitaire',
         'product' => 'Produit',
+        'invoice' => 'Facture',
         'currency' => 'Devise',
         'rate' => 'Taux',
         'bank' => 'Banque',
@@ -134,6 +136,7 @@ return [
         'head_office_address' => 'Adresse du siège',
         'billing_address' => 'Adresse de facturation',
         'notes' => 'Notes',
+        'pdf_path' => 'Chemin du PDF',
     ],
     'statuses' => [
         'draft' => 'Brouillon',
@@ -151,5 +154,7 @@ return [
         'quote_converted' => 'Devis converti en facture',
         'quote_converted_body' => 'Une nouvelle facture a été créée à partir de ce devis.',
         'demo_seeded' => 'Données de démonstration créées',
+        'invoice_pdf_regenerated' => 'PDF de facture régénéré',
+        'pdf_missing' => 'Aucun PDF n\'a encore été stocké.',
     ],
 ];

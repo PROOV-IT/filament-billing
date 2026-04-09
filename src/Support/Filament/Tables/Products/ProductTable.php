@@ -40,6 +40,7 @@ final class ProductTable
                     ->url(fn (Product $record): string => ProductResource::getUrl('view', ['record' => $record->getRouteKey()])),
                 EditAction::make()
                     ->label(__('filament-billing::filament-billing.actions.edit'))
+                    ->visible(fn (Product $record): bool => self::canEdit($record))
                     ->url(fn (Product $record): string => ProductResource::getUrl('edit', ['record' => $record->getRouteKey()])),
                 DeleteAction::make()
                     ->label(__('filament-billing::filament-billing.actions.delete'))
@@ -55,6 +56,11 @@ final class ProductTable
 
     private static function canDelete(Product $record): bool
     {
-        return $record->prices()->doesntExist();
+        return self::canEdit($record) && $record->prices()->doesntExist();
+    }
+
+    private static function canEdit(Product $record): bool
+    {
+        return $record->canEditCatalog();
     }
 }

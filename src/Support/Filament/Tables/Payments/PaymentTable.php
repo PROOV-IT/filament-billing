@@ -22,7 +22,7 @@ final class PaymentTable
     {
         return $table
             ->columns([
-                TextColumn::make('invoice.number')->label(__('filament-billing::filament-billing.resources.invoice.singular'))->searchable()->sortable(),
+                TextColumn::make('invoice.number')->label(__('filament-billing::filament-billing.columns.invoice'))->searchable()->sortable(),
                 TextColumn::make('customer.legal_name')->label(__('filament-billing::filament-billing.resources.customer.singular'))->searchable()->toggleable(),
                 TextColumn::make('status')->label(__('filament-billing::filament-billing.columns.status'))->badge()->formatStateUsing(static fn ($state): string => EnumLabel::make($state)),
                 TextColumn::make('method')->label(__('filament-billing::filament-billing.columns.type'))->badge()->formatStateUsing(static fn ($state): string => EnumLabel::make($state))->toggleable(),

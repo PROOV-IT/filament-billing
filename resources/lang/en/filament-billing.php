@@ -51,6 +51,7 @@ return [
         'finalize' => 'Finalize',
         'generate_share_link' => 'Generate share link',
         'revoke_share_link' => 'Revoke share link',
+        'regenerate_pdf' => 'Regenerate PDF',
         'convert_to_invoice' => 'Convert to invoice',
         'credit_note' => 'Credit note',
     ],
@@ -96,6 +97,7 @@ return [
         'quantity' => 'Quantity',
         'unit_price' => 'Unit price',
         'product' => 'Product',
+        'invoice' => 'Invoice',
         'currency' => 'Currency',
         'rate' => 'Rate',
         'bank' => 'Bank',
@@ -134,6 +136,7 @@ return [
         'head_office_address' => 'Head office address',
         'billing_address' => 'Billing address',
         'notes' => 'Notes',
+        'pdf_path' => 'PDF path',
     ],
     'statuses' => [
         'draft' => 'Draft',
@@ -151,5 +154,7 @@ return [
         'quote_converted' => 'Quote converted to invoice',
         'quote_converted_body' => 'A new invoice has been created from this quote.',
         'demo_seeded' => 'Demo data seeded',
+        'invoice_pdf_regenerated' => 'Invoice PDF regenerated',
+        'pdf_missing' => 'No PDF has been stored yet.',
     ],
 ];

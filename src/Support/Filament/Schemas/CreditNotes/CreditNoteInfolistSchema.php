@@ -17,6 +17,7 @@ final class CreditNoteInfolistSchema
             Section::make(__('filament-billing::filament-billing.sections.credit_note_details'))
                 ->schema([
                     TextEntry::make('company.legal_name')->label(__('filament-billing::filament-billing.resources.company.singular')),
+                    TextEntry::make('customer.legal_name')->label(__('filament-billing::filament-billing.resources.customer.singular')),
                     TextEntry::make('invoice.number')->label(__('filament-billing::filament-billing.resources.invoice.singular')),
                     TextEntry::make('status')->label(__('filament-billing::filament-billing.columns.status'))->formatStateUsing(static fn ($state): string => EnumLabel::make($state)),
                     TextEntry::make('number')->label(__('filament-billing::filament-billing.columns.number')),

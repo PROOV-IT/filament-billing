@@ -27,6 +27,7 @@ final class InvoiceInfolistSchema
                     TextEntry::make('issued_at')->label(__('filament-billing::filament-billing.columns.issued_at')),
                     TextEntry::make('due_at')->label(__('filament-billing::filament-billing.columns.due_at')),
                     TextEntry::make('total_amount')->label(__('filament-billing::filament-billing.columns.total')),
+                    TextEntry::make('latest_pdf_document_render_path')->label(__('filament-billing::filament-billing.columns.pdf_path'))->placeholder(__('filament-billing::filament-billing.messages.pdf_missing')),
                     TextEntry::make('notes')->label(__('filament-billing::filament-billing.columns.notes'))->columnSpanFull(),
                 ])
                 ->columns(2),

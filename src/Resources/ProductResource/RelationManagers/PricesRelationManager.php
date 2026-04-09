@@ -41,6 +41,23 @@ final class PricesRelationManager extends RelationManager
 
     public function table(Table $table): Table
     {
-        return PricesRelationManagerTable::make($table);
+        $ownerRecord = $this->getOwnerRecord();
+
+        if (! $ownerRecord instanceof Product) {
+            return $table;
+        }
+
+        return PricesRelationManagerTable::make($table, $ownerRecord->canManagePrices());
+    }
+
+    public function isReadOnly(): bool
+    {
+        $ownerRecord = $this->getOwnerRecord();
+
+        if (! $ownerRecord instanceof Product) {
+            return true;
+        }
+
+        return ! $ownerRecord->canManagePrices();
     }
 }
