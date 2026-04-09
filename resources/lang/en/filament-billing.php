@@ -95,6 +95,8 @@ return [
         'order' => 'Order',
         'quantity' => 'Quantity',
         'unit_price' => 'Unit price',
+        'product' => 'Product',
+        'currency' => 'Currency',
         'rate' => 'Rate',
         'bank' => 'Bank',
         'account_holder' => 'Account holder',
