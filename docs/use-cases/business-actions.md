@@ -7,9 +7,12 @@
 Invoices can expose the following actions from the list view:
 
 - finalize a draft invoice
+- download the generated PDF
 - generate a public share link
 - revoke a public share link
 - create a credit note from an invoice
+
+The same invoice actions are also available from the view and edit pages when the invoice is being managed directly.
 
 ## Quote actions
 

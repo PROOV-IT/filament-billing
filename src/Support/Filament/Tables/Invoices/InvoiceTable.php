@@ -15,6 +15,7 @@ use Proovit\Billing\Enums\InvoiceStatus;
 use Proovit\Billing\Enums\InvoiceType;
 use Proovit\Billing\Models\Invoice;
 use Proovit\FilamentBilling\Resources\InvoiceResource;
+use Proovit\FilamentBilling\Support\Filament\Actions\Invoices\InvoicePdfActions;
 use Proovit\FilamentBilling\Support\Filament\EnumLabel;
 
 final class InvoiceTable
@@ -41,6 +42,7 @@ final class InvoiceTable
                 ViewAction::make()
                     ->label(__('filament-billing::filament-billing.actions.view'))
                     ->url(fn (Invoice $record): string => InvoiceResource::getUrl('view', ['record' => $record->getRouteKey()])),
+                InvoicePdfActions::downloadTableAction(),
                 EditAction::make()
                     ->label(__('filament-billing::filament-billing.actions.edit'))
                     ->url(fn (Invoice $record): string => InvoiceResource::getUrl('edit', ['record' => $record->getRouteKey()]))
