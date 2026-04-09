@@ -6,7 +6,18 @@ namespace Proovit\FilamentBilling;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
-use Proovit\FilamentBilling\Pages\BillingOverview;
+use Proovit\FilamentBilling\Resources\CompanyResource;
+use Proovit\FilamentBilling\Resources\CreditNoteResource;
+use Proovit\FilamentBilling\Resources\CustomerResource;
+use Proovit\FilamentBilling\Resources\InvoiceResource;
+use Proovit\FilamentBilling\Resources\InvoiceSeriesResource;
+use Proovit\FilamentBilling\Resources\PaymentResource;
+use Proovit\FilamentBilling\Resources\ProductResource;
+use Proovit\FilamentBilling\Resources\QuoteResource;
+use Proovit\FilamentBilling\Resources\TaxRateResource;
+use Proovit\FilamentBilling\Widgets\BillingStatsWidget;
+use Proovit\FilamentBilling\Widgets\RecentInvoicesWidget;
+use Proovit\FilamentBilling\Widgets\RecentQuotesWidget;
 
 final class FilamentBillingPlugin implements Plugin
 {
@@ -36,13 +47,25 @@ final class FilamentBillingPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
-        if (! $this->dashboardEnabled) {
-            return;
-        }
-
-        $panel->pages([
-            BillingOverview::class,
+        $panel->resources([
+            CompanyResource::class,
+            CreditNoteResource::class,
+            CustomerResource::class,
+            InvoiceResource::class,
+            InvoiceSeriesResource::class,
+            PaymentResource::class,
+            ProductResource::class,
+            QuoteResource::class,
+            TaxRateResource::class,
         ]);
+
+        if ($this->dashboardEnabled) {
+            $panel->widgets([
+                BillingStatsWidget::class,
+                RecentInvoicesWidget::class,
+                RecentQuotesWidget::class,
+            ]);
+        }
     }
 
     public function boot(Panel $panel): void

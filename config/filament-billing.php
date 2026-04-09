@@ -6,9 +6,7 @@ return [
     'navigation_group' => 'Billing',
     'dashboard' => [
         'enabled' => true,
-        'slug' => 'billing-overview',
-        'title' => 'Billing Overview',
-        'navigation_label' => 'Billing',
         'recent_invoices_limit' => 5,
+        'recent_quotes_limit' => 5,
     ],
 ];
