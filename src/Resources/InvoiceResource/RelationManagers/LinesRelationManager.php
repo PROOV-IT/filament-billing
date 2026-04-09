@@ -8,6 +8,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Proovit\Billing\Models\Invoice;
 use Proovit\FilamentBilling\Support\Filament\RelationManagers\Invoices\LinesRelationManagerFormSchema;
 use Proovit\FilamentBilling\Support\Filament\RelationManagers\Invoices\LinesRelationManagerTable;
 
@@ -24,6 +25,17 @@ final class LinesRelationManager extends RelationManager
         return __('filament-billing::filament-billing.sections.line_item');
     }
 
+    public function isReadOnly(): bool
+    {
+        $ownerRecord = $this->getOwnerRecord();
+
+        if (! $ownerRecord instanceof Invoice) {
+            return true;
+        }
+
+        return ! $ownerRecord->isEditableDraft();
+    }
+
     public function form(Schema $schema): Schema
     {
         return LinesRelationManagerFormSchema::make($schema);
@@ -31,6 +43,12 @@ final class LinesRelationManager extends RelationManager
 
     public function table(Table $table): Table
     {
-        return LinesRelationManagerTable::make($table);
+        $ownerRecord = $this->getOwnerRecord();
+
+        if (! $ownerRecord instanceof Invoice) {
+            return $table;
+        }
+
+        return LinesRelationManagerTable::make($table, $ownerRecord);
     }
 }
