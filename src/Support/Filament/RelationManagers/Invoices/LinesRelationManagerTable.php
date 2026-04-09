@@ -10,12 +10,11 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Proovit\Billing\Models\Invoice;
 use Proovit\Billing\Models\InvoiceLine;
 
 final class LinesRelationManagerTable
 {
-    public static function make(Table $table, Invoice $ownerRecord): Table
+    public static function make(Table $table, bool $canManageLineItems): Table
     {
         return $table
             ->columns([
@@ -29,22 +28,22 @@ final class LinesRelationManagerTable
             ->headerActions([
                 CreateAction::make()
                     ->label(__('filament-billing::filament-billing.actions.create'))
-                    ->visible(fn (): bool => $ownerRecord->isEditableDraft()),
+                    ->visible(fn (): bool => $canManageLineItems),
             ])
             ->recordActions([
                 EditAction::make()
                     ->label(__('filament-billing::filament-billing.actions.edit'))
-                    ->visible(fn (InvoiceLine $record): bool => $ownerRecord->isEditableDraft()),
+                    ->visible(fn (InvoiceLine $record): bool => $canManageLineItems),
                 DeleteAction::make()
                     ->label(__('filament-billing::filament-billing.actions.delete'))
-                    ->visible(fn (InvoiceLine $record): bool => $ownerRecord->isEditableDraft()),
+                    ->visible(fn (InvoiceLine $record): bool => $canManageLineItems),
             ])
             ->bulkActions([
                 DeleteBulkAction::make()
                     ->label(__('filament-billing::filament-billing.actions.bulk_delete'))
-                    ->visible(fn (): bool => $ownerRecord->isEditableDraft()),
+                    ->visible(fn (): bool => $canManageLineItems),
             ])
-            ->checkIfRecordIsSelectableUsing(static fn (InvoiceLine $record): bool => $ownerRecord->isEditableDraft())
+            ->checkIfRecordIsSelectableUsing(static fn (InvoiceLine $record): bool => $canManageLineItems)
             ->defaultSort('sort_order');
     }
 }

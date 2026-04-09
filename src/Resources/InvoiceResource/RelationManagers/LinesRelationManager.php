@@ -33,7 +33,7 @@ final class LinesRelationManager extends RelationManager
             return true;
         }
 
-        return ! $ownerRecord->isEditableDraft();
+        return ! self::canManageLineItems($ownerRecord);
     }
 
     public function form(Schema $schema): Schema
@@ -49,6 +49,17 @@ final class LinesRelationManager extends RelationManager
             return $table;
         }
 
-        return LinesRelationManagerTable::make($table, $ownerRecord);
+        return LinesRelationManagerTable::make($table, self::canManageLineItems($ownerRecord));
+    }
+
+    private static function canManageLineItems(Invoice $invoice): bool
+    {
+        $documentType = $invoice->getAttribute('document_type');
+        $status = $invoice->getAttribute('status');
+
+        $documentTypeValue = is_object($documentType) && method_exists($documentType, 'value') ? $documentType->value : (string) $documentType;
+        $statusValue = is_object($status) && method_exists($status, 'value') ? $status->value : (string) $status;
+
+        return $documentTypeValue === 'invoice' && $statusValue === 'draft';
     }
 }

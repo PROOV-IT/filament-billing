@@ -8,6 +8,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Proovit\Billing\Models\Quote;
 use Proovit\FilamentBilling\Support\Filament\RelationManagers\Invoices\LinesRelationManagerFormSchema;
 use Proovit\FilamentBilling\Support\Filament\RelationManagers\Invoices\LinesRelationManagerTable;
 
@@ -31,6 +32,21 @@ final class LinesRelationManager extends RelationManager
 
     public function table(Table $table): Table
     {
-        return LinesRelationManagerTable::make($table);
+        $ownerRecord = $this->getOwnerRecord();
+
+        if (! $ownerRecord instanceof Quote) {
+            return $table;
+        }
+
+        return LinesRelationManagerTable::make($table, self::canManageLineItems($ownerRecord));
+    }
+
+    private static function canManageLineItems(Quote $quote): bool
+    {
+        $status = $quote->getAttribute('status');
+        $statusValue = is_object($status) && method_exists($status, 'value') ? $status->value : (string) $status;
+
+        return $quote->getAttribute('converted_invoice_id') === null
+            && in_array($statusValue, ['draft', 'sent'], true);
     }
 }

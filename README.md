@@ -17,6 +17,7 @@ Filament 5 panel plugin for the ProovIT billing core.
 - [Billing dashboard](docs/use-cases/dashboard.md)
 - [Business actions](docs/use-cases/business-actions.md)
 - [Demo seeding](docs/use-cases/demo-seeding.md)
+- [Release process](docs/release-process.md)
 - [Docs index](docs/index.md)
 
 ## Installation
@@ -53,3 +54,5 @@ When developing against the `dev` branch of this repository, require it explicit
 - The package is organized around native Filament resources, relation managers, and widgets instead of custom Blade screens
 - The demo seeder is designed for local testing and panel walkthroughs
 - Most user-facing strings are translatable through `filament-billing-translations`
+- `dev` is the integration branch; tags are cut from `main`
+- Keep plugin-only releases on the fourth numeric segment when the billing core does not change
