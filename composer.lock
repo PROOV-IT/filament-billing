@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0919eeebcda47646de99550745f28430",
+    "content-hash": "59e429f851e1d6b9bab441de405a3dd3",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -4355,16 +4355,16 @@
         },
         {
             "name": "proovit/laravel-billing",
-            "version": "1.0.5",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PROOV-IT/proovit-laravel-billing.git",
-                "reference": "3a32edd76fa56c5da90be590adf806fea177bdf8"
+                "reference": "b5ef6b37fdc409b661eaa93cf348940e06efd907"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PROOV-IT/proovit-laravel-billing/zipball/3a32edd76fa56c5da90be590adf806fea177bdf8",
-                "reference": "3a32edd76fa56c5da90be590adf806fea177bdf8",
+                "url": "https://api.github.com/repos/PROOV-IT/proovit-laravel-billing/zipball/b5ef6b37fdc409b661eaa93cf348940e06efd907",
+                "reference": "b5ef6b37fdc409b661eaa93cf348940e06efd907",
                 "shasum": ""
             },
             "require": {
@@ -4394,43 +4394,20 @@
             "autoload": {
                 "psr-4": {
                     "Proovit\\Billing\\": "src/",
-                    "Proovit\\Billing\\Database\\Factories\\": "database/factories/",
-                    "Proovit\\Billing\\Database\\Seeders\\": "database/seeders/"
+                    "Proovit\\Billing\\Database\\Seeders\\": "database/seeders/",
+                    "Proovit\\Billing\\Database\\Factories\\": "database/factories/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Tests\\": "tests/"
-                }
-            },
-            "scripts": {
-                "format": [
-                    "@php vendor/bin/pint src tests"
-                ],
-                "format:test": [
-                    "@php vendor/bin/pint --test src tests"
-                ],
-                "analyse": [
-                    "@php vendor/bin/phpstan analyse --ansi --memory-limit=1G"
-                ],
-                "qa": [
-                    "@format:test",
-                    "@analyse",
-                    "@test"
-                ],
-                "test": [
-                    "@php vendor/bin/pest"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "Laravel 13 billing package for invoices, quotes, payments, credit notes, public invoice sharing, PDF rendering, and API-driven billing workflows.",
             "support": {
-                "source": "https://github.com/PROOV-IT/proovit-laravel-billing/tree/1.0.5",
-                "issues": "https://github.com/PROOV-IT/proovit-laravel-billing/issues"
+                "issues": "https://github.com/PROOV-IT/proovit-laravel-billing/issues",
+                "source": "https://github.com/PROOV-IT/proovit-laravel-billing/tree/1.0.6"
             },
-            "time": "2026-04-09T13:39:14+00:00"
+            "time": "2026-04-10T15:36:35+00:00"
         },
         {
             "name": "psr/clock",
@@ -12521,16 +12498,16 @@
         },
         {
             "name": "webmozart/assert",
-            "version": "2.1.6",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webmozarts/assert.git",
-                "reference": "ff31ad6efc62e66e518fbab1cde3453d389bcdc8"
+                "reference": "1b99650e7ffcad232624a260bc7fbdec2ffc407c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozarts/assert/zipball/ff31ad6efc62e66e518fbab1cde3453d389bcdc8",
-                "reference": "ff31ad6efc62e66e518fbab1cde3453d389bcdc8",
+                "url": "https://api.github.com/repos/webmozarts/assert/zipball/1b99650e7ffcad232624a260bc7fbdec2ffc407c",
+                "reference": "1b99650e7ffcad232624a260bc7fbdec2ffc407c",
                 "shasum": ""
             },
             "require": {
@@ -12577,9 +12554,9 @@
             ],
             "support": {
                 "issues": "https://github.com/webmozarts/assert/issues",
-                "source": "https://github.com/webmozarts/assert/tree/2.1.6"
+                "source": "https://github.com/webmozarts/assert/tree/2.2.0"
             },
-            "time": "2026-02-27T10:28:38+00:00"
+            "time": "2026-04-09T16:54:47+00:00"
         }
     ],
     "aliases": [],
