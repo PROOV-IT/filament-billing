@@ -13,6 +13,7 @@ final class FilamentBillingServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/filament-billing.php', 'filament-billing');
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'filament-billing');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'filament-billing');
     }
 
     public function boot(): void
@@ -33,6 +34,10 @@ final class FilamentBillingServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../resources/lang' => lang_path('vendor/filament-billing'),
         ], 'filament-billing-translations');
+
+        $this->publishes([
+            __DIR__.'/../resources/views' => resource_path('views/vendor/filament-billing'),
+        ], 'filament-billing-views');
 
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
     }
