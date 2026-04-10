@@ -4,6 +4,52 @@ return [
     'navigation' => [
         'group' => 'Facturation',
     ],
+    'settings' => [
+        'title' => 'Configuration facturation',
+        'navigation' => 'Configuration',
+        'note' => [
+            'heading' => 'Configuration du tableau de bord',
+            'body' => 'Ajuste les libellés du tableau de bord, la visibilité des widgets et les limites des enregistrements récents depuis le panel.',
+        ],
+        'actions' => [
+            'save' => 'Enregistrer',
+        ],
+        'notifications' => [
+            'saved_title' => 'Configuration enregistrée',
+            'saved_body' => 'Les paramètres du panel de facturation ont été mis à jour.',
+            'save_failed_title' => 'Configuration non enregistrée',
+            'save_failed_body' => 'La configuration de facturation n’a pas pu être persistée.',
+        ],
+        'sections' => [
+            'dashboard' => 'Tableau de bord',
+            'dashboard_description' => 'Contrôle la page d’ensemble et le nombre d’éléments récents affichés.',
+        ],
+        'fields' => [
+            'dashboard_enabled' => 'Activer le tableau de bord',
+            'navigation_label' => 'Libellé de navigation',
+            'navigation_group' => 'Groupe de navigation',
+            'recent_invoices_limit' => 'Limite de factures récentes',
+            'recent_quotes_limit' => 'Limite de devis récents',
+        ],
+    ],
+    'documentation' => [
+        'title' => 'Documentation API',
+        'navigation' => 'Docs API',
+        'description' => 'Ouvre la documentation Scramble générée par le package facturation. L’interface est pensée pour les humains, le JSON pour les outils et la CI.',
+        'actions' => [
+            'open_ui' => 'Ouvrir Scramble',
+            'open_json' => 'Ouvrir le schéma JSON',
+        ],
+        'sections' => [
+            'overview' => 'Documentation Scramble',
+            'paths' => 'Chemins configurés',
+        ],
+        'paths' => [
+            'description' => 'Le package facturation expose Scramble uniquement lorsque la pile API est activée.',
+            'ui' => 'Chemin UI',
+            'json' => 'Chemin JSON',
+        ],
+    ],
     'resources' => [
         'company' => [
             'singular' => 'Société',

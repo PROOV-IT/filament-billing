@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Proovit\FilamentBilling;
 
 use Illuminate\Support\ServiceProvider;
+use Proovit\FilamentBilling\Support\BillingSettingsRepository;
 
 final class FilamentBillingServiceProvider extends ServiceProvider
 {
@@ -12,10 +13,20 @@ final class FilamentBillingServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/filament-billing.php', 'filament-billing');
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'filament-billing');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'filament-billing');
     }
 
     public function boot(): void
     {
+        try {
+            config()->set(
+                'filament-billing',
+                array_replace_recursive(config('filament-billing', []), app(BillingSettingsRepository::class)->all()),
+            );
+        } catch (\Throwable) {
+            //
+        }
+
         $this->publishes([
             __DIR__.'/../config/filament-billing.php' => config_path('filament-billing.php'),
         ], 'filament-billing-config');
@@ -23,6 +34,10 @@ final class FilamentBillingServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../resources/lang' => lang_path('vendor/filament-billing'),
         ], 'filament-billing-translations');
+
+        $this->publishes([
+            __DIR__.'/../resources/views' => resource_path('views/vendor/filament-billing'),
+        ], 'filament-billing-views');
 
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
     }

@@ -15,6 +15,8 @@ Filament 5 panel plugin for the ProovIT billing core.
 - [Installation](docs/install.md)
 - [Configuration](docs/configuration.md)
 - [Billing dashboard](docs/use-cases/dashboard.md)
+- [API documentation](docs/use-cases/api-documentation.md)
+- [Settings page](docs/use-cases/settings-page.md)
 - [Business actions](docs/use-cases/business-actions.md)
 - [Demo seeding](docs/use-cases/demo-seeding.md)
 - [Release process](docs/release-process.md)
@@ -61,3 +63,10 @@ When developing against the `dev` branch of this repository, require it explicit
 - `dev` is the integration branch; tags are cut from `main`
 - Keep plugin-only releases on the fourth numeric segment when the billing core does not change
 - The plugin can run against the core package defaults; the core installer is optional
+
+## Release notes
+
+### 1.0.6
+
+- Added a native API documentation page for Scramble
+- Kept proof export available from the proofs page while removing the redundant export page
