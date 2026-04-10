@@ -1,73 +1,73 @@
 {
-  "$schema": "https://getcomposer.org/schema.json",
-  "name": "proovit/filament-billing",
-  "description": "Filament 5 panel plugin for the ProovIT billing core.",
-  "type": "library",
-  "license": "MIT",
-  "require": {
-    "php": "^8.3",
-    "filament/filament": "^5.0",
-    "proovit/laravel-billing": "dev-dev@dev"
-  },
-  "require-dev": {
-    "larastan/larastan": "^3.9.3",
-    "laravel/pint": "^1.29.0",
-    "orchestra/testbench": "^11.0",
-    "pestphp/pest": "^3.8",
-    "phpstan/phpstan": "^2.1.22"
-  },
-  "autoload": {
-    "psr-4": {
-      "Proovit\\FilamentBilling\\": "src/",
-      "Proovit\\FilamentBilling\\Database\\Factories\\": "database/factories/",
-      "Proovit\\FilamentBilling\\Database\\Seeders\\": "database/seeders/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Tests\\": "tests/"
-    }
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "Proovit\\FilamentBilling\\FilamentBillingServiceProvider"
-      ]
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "proovit/filament-billing",
+    "description": "Filament 5 panel plugin for the ProovIT billing core.",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^8.3",
+        "filament/filament": "^5.0",
+        "proovit/laravel-billing": "^1.0.6"
     },
-    "branch-alias": {
-      "dev-dev": "0.1.x-dev"
-    }
-  },
-  "scripts": {
-    "format": [
-      "@php vendor/bin/pint src tests"
-    ],
-    "format:test": [
-      "@php vendor/bin/pint --test src tests"
-    ],
-    "analyse": [
-      "@php vendor/bin/phpstan analyse --ansi --memory-limit=1G"
-    ],
-    "qa": [
-      "@format:test",
-      "@analyse",
-      "@test"
-    ],
-    "test": [
-      "@php vendor/bin/pest"
-    ]
-  },
-  "minimum-stability": "stable",
-  "prefer-stable": true,
-  "config": {
-    "optimize-autoloader": true,
-    "preferred-install": "dist",
-    "sort-packages": true,
-    "platform": {
-      "php": "8.3.30"
+    "require-dev": {
+        "larastan/larastan": "^3.9.3",
+        "laravel/pint": "^1.29.0",
+        "orchestra/testbench": "^11.0",
+        "pestphp/pest": "^3.8",
+        "phpstan/phpstan": "^2.1.22"
     },
-    "allow-plugins": {
-      "pestphp/pest-plugin": true
+    "autoload": {
+        "psr-4": {
+            "Proovit\\FilamentBilling\\": "src/",
+            "Proovit\\FilamentBilling\\Database\\Factories\\": "database/factories/",
+            "Proovit\\FilamentBilling\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Proovit\\FilamentBilling\\FilamentBillingServiceProvider"
+            ]
+        },
+        "branch-alias": {
+            "dev-dev": "0.1.x-dev"
+        }
+    },
+    "scripts": {
+        "format": [
+            "@php vendor/bin/pint src tests"
+        ],
+        "format:test": [
+            "@php vendor/bin/pint --test src tests"
+        ],
+        "analyse": [
+            "@php vendor/bin/phpstan analyse --ansi --memory-limit=1G"
+        ],
+        "qa": [
+            "@format:test",
+            "@analyse",
+            "@test"
+        ],
+        "test": [
+            "@php vendor/bin/pest"
+        ]
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "platform": {
+            "php": "8.3.30"
+        },
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     }
-  }
 }
