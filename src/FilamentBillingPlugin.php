@@ -6,6 +6,7 @@ namespace Proovit\FilamentBilling;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
+use Proovit\FilamentBilling\Pages\BillingDocumentation;
 use Proovit\FilamentBilling\Pages\BillingSettings;
 use Proovit\FilamentBilling\Resources\CompanyResource;
 use Proovit\FilamentBilling\Resources\CreditNoteResource;
@@ -63,6 +64,7 @@ final class FilamentBillingPlugin implements Plugin
         ]);
 
         $panel->pages([
+            BillingDocumentation::class,
             BillingSettings::class,
         ]);
 

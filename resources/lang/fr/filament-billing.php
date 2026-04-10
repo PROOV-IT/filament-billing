@@ -32,6 +32,24 @@ return [
             'recent_quotes_limit' => 'Limite de devis récents',
         ],
     ],
+    'documentation' => [
+        'title' => 'Documentation API',
+        'navigation' => 'Docs API',
+        'description' => 'Ouvre la documentation Scramble générée par le package facturation. L’interface est pensée pour les humains, le JSON pour les outils et la CI.',
+        'actions' => [
+            'open_ui' => 'Ouvrir Scramble',
+            'open_json' => 'Ouvrir le schéma JSON',
+        ],
+        'sections' => [
+            'overview' => 'Documentation Scramble',
+            'paths' => 'Chemins configurés',
+        ],
+        'paths' => [
+            'description' => 'Le package facturation expose Scramble uniquement lorsque la pile API est activée.',
+            'ui' => 'Chemin UI',
+            'json' => 'Chemin JSON',
+        ],
+    ],
     'resources' => [
         'company' => [
             'singular' => 'Société',

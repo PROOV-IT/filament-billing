@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Proovit\FilamentBilling\FilamentBillingPlugin;
+use Proovit\FilamentBilling\Pages\BillingDocumentation;
 use Proovit\FilamentBilling\Resources\CompanyResource;
 use Proovit\FilamentBilling\Resources\InvoiceResource;
 use Proovit\FilamentBilling\Support\BillingOverviewMetrics;
@@ -24,5 +25,6 @@ it('builds a billing overview payload', function (): void {
 it('exposes the expected filament classes', function (): void {
     expect(class_exists(CompanyResource::class))->toBeTrue();
     expect(class_exists(InvoiceResource::class))->toBeTrue();
+    expect(class_exists(BillingDocumentation::class))->toBeTrue();
     expect(class_exists(BillingStatsWidget::class))->toBeTrue();
 });
