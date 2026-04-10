@@ -11,6 +11,7 @@ This package adds a Filament 5 panel integration for the ProovIT billing core.
 - [Settings page](use-cases/settings-page.md)
 - [Business actions](use-cases/business-actions.md)
 - [Demo seeding](use-cases/demo-seeding.md)
+- [Release notes](release-notes.md)
 - [Release process](release-process.md)
 
 ## Current scope
