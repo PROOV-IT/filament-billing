@@ -4,6 +4,34 @@ return [
     'navigation' => [
         'group' => 'Billing',
     ],
+    'settings' => [
+        'title' => 'Billing settings',
+        'navigation' => 'Settings',
+        'note' => [
+            'heading' => 'Dashboard configuration',
+            'body' => 'Adjust the billing dashboard labels, widget visibility, and recent record limits from the panel.',
+        ],
+        'actions' => [
+            'save' => 'Save settings',
+        ],
+        'notifications' => [
+            'saved_title' => 'Settings saved',
+            'saved_body' => 'Billing panel settings have been updated.',
+            'save_failed_title' => 'Settings not saved',
+            'save_failed_body' => 'The billing settings could not be persisted.',
+        ],
+        'sections' => [
+            'dashboard' => 'Dashboard',
+            'dashboard_description' => 'Control the overview page and the number of recent records displayed.',
+        ],
+        'fields' => [
+            'dashboard_enabled' => 'Enable dashboard',
+            'navigation_label' => 'Navigation label',
+            'navigation_group' => 'Navigation group',
+            'recent_invoices_limit' => 'Recent invoices limit',
+            'recent_quotes_limit' => 'Recent quotes limit',
+        ],
+    ],
     'resources' => [
         'company' => [
             'singular' => 'Company',

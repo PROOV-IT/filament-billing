@@ -15,6 +15,7 @@ Filament 5 panel plugin for the ProovIT billing core.
 - [Installation](docs/install.md)
 - [Configuration](docs/configuration.md)
 - [Billing dashboard](docs/use-cases/dashboard.md)
+- [Settings page](docs/use-cases/settings-page.md)
 - [Business actions](docs/use-cases/business-actions.md)
 - [Demo seeding](docs/use-cases/demo-seeding.md)
 - [Release process](docs/release-process.md)

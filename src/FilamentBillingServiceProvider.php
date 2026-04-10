@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Proovit\FilamentBilling;
 
 use Illuminate\Support\ServiceProvider;
+use Proovit\FilamentBilling\Support\BillingSettingsRepository;
 
 final class FilamentBillingServiceProvider extends ServiceProvider
 {
@@ -16,6 +17,15 @@ final class FilamentBillingServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        try {
+            config()->set(
+                'filament-billing',
+                array_replace_recursive(config('filament-billing', []), app(BillingSettingsRepository::class)->all()),
+            );
+        } catch (\Throwable) {
+            //
+        }
+
         $this->publishes([
             __DIR__.'/../config/filament-billing.php' => config_path('filament-billing.php'),
         ], 'filament-billing-config');

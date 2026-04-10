@@ -23,4 +23,17 @@ return [
 The plugin is intentionally lightweight so that it can be extended per panel later.
 You can override the configuration values in your application config and the widgets will pick them up automatically.
 
+## Runtime settings page
+
+The package also ships with a panel settings page that persists dashboard overrides at runtime.
+
+That page lets you adjust:
+
+- dashboard visibility
+- navigation label and group
+- recent invoices limit
+- recent quotes limit
+
+The saved overrides are stored in the application cache layer and merged on top of the published config values.
+
 All user-facing labels live in the package translation files and can be published with `filament-billing-translations`.

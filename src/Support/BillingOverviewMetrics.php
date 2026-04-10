@@ -68,7 +68,7 @@ final class BillingOverviewMetrics
      */
     public function recentInvoices(): array
     {
-        $recentLimit = (int) config('filament-billing.dashboard.recent_invoices_limit', 5);
+        $recentLimit = (int) (app(BillingSettingsRepository::class)->all()['dashboard']['recent_invoices_limit'] ?? config('filament-billing.dashboard.recent_invoices_limit', 5));
 
         return Collection::make(
             Invoice::query()
@@ -97,7 +97,7 @@ final class BillingOverviewMetrics
      */
     public function recentQuotes(): array
     {
-        $recentLimit = (int) config('filament-billing.dashboard.recent_quotes_limit', 5);
+        $recentLimit = (int) (app(BillingSettingsRepository::class)->all()['dashboard']['recent_quotes_limit'] ?? config('filament-billing.dashboard.recent_quotes_limit', 5));
 
         return Collection::make(
             Quote::query()

@@ -6,6 +6,7 @@ namespace Proovit\FilamentBilling;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
+use Proovit\FilamentBilling\Pages\BillingSettings;
 use Proovit\FilamentBilling\Resources\CompanyResource;
 use Proovit\FilamentBilling\Resources\CreditNoteResource;
 use Proovit\FilamentBilling\Resources\CustomerResource;
@@ -15,6 +16,7 @@ use Proovit\FilamentBilling\Resources\PaymentResource;
 use Proovit\FilamentBilling\Resources\ProductResource;
 use Proovit\FilamentBilling\Resources\QuoteResource;
 use Proovit\FilamentBilling\Resources\TaxRateResource;
+use Proovit\FilamentBilling\Support\BillingSettingsRepository;
 use Proovit\FilamentBilling\Widgets\BillingStatsWidget;
 use Proovit\FilamentBilling\Widgets\RecentInvoicesWidget;
 use Proovit\FilamentBilling\Widgets\RecentQuotesWidget;
@@ -25,7 +27,8 @@ final class FilamentBillingPlugin implements Plugin
 
     public function __construct()
     {
-        $this->dashboardEnabled = (bool) config('filament-billing.dashboard.enabled', true);
+        $settings = app(BillingSettingsRepository::class)->all();
+        $this->dashboardEnabled = (bool) data_get($settings, 'dashboard.enabled', config('filament-billing.dashboard.enabled', true));
     }
 
     public static function make(): static
@@ -57,6 +60,10 @@ final class FilamentBillingPlugin implements Plugin
             ProductResource::class,
             QuoteResource::class,
             TaxRateResource::class,
+        ]);
+
+        $panel->pages([
+            BillingSettings::class,
         ]);
 
         if ($this->dashboardEnabled) {
