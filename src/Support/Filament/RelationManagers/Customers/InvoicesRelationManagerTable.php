@@ -38,10 +38,10 @@ final class InvoicesRelationManagerTable
             ->actions([
                 ViewAction::make('view')
                     ->label(__('filament-billing::filament-billing.actions.view'))
-                    ,
+                    ->url(fn (Invoice $record): string => InvoiceResource::getUrl('view', ['record' => $record])),
                 EditAction::make('edit')
                     ->label(__('filament-billing::filament-billing.actions.edit'))
-                    
+                    ->url(fn (Invoice $record): string => InvoiceResource::getUrl('edit', ['record' => $record]))
                     ->visible(fn (Invoice $record): bool => self::canEdit($record)),
                 DeleteAction::make()
                     ->label(__('filament-billing::filament-billing.actions.delete'))

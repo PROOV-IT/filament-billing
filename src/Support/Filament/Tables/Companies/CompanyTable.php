@@ -39,10 +39,10 @@ final class CompanyTable
             ->actions([
                 ViewAction::make('view')
                     ->label(__('filament-billing::filament-billing.actions.view'))
-                    ,
+                    ->url(fn (Company $record): string => CompanyResource::getUrl('view', ['record' => $record])),
                 EditAction::make('edit')
                     ->label(__('filament-billing::filament-billing.actions.edit'))
-                    ,
+                    ->url(fn (Company $record): string => CompanyResource::getUrl('edit', ['record' => $record])),
                 DeleteAction::make()
                     ->label(__('filament-billing::filament-billing.actions.delete'))
                     ->visible(fn (Company $record): bool => self::canDelete($record)),

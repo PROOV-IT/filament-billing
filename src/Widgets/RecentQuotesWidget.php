@@ -45,7 +45,7 @@ final class RecentQuotesWidget extends TableWidget
             ->actions([
                 ViewAction::make('view')
                     ->label(__('filament-billing::filament-billing.actions.view'))
-                    ,
+                    ->url(fn (Quote $record): string => QuoteResource::getUrl('view', ['record' => $record])),
             ])
             ->paginated([5, 10]);
     }
