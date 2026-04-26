@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Proovit\FilamentBilling\Widgets;
 
+use Filament\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget;
@@ -44,7 +45,11 @@ final class RecentInvoicesWidget extends TableWidget
                     ->label(__('filament-billing::filament-billing.columns.total'))
                     ->formatStateUsing(static fn ($state, Invoice $record): string => number_format((float) $state, 2, ',', ' ').' '.($record->currency ?? 'EUR')),
             ])
-            ->recordUrl(static fn (Invoice $record): string => InvoiceResource::getUrl('view', ['record' => $record->getRouteKey()]))
+            ->recordActions([
+                Action::make('view')
+                    ->label(__('filament-billing::filament-billing.actions.view'))
+                    ->url(static fn (Invoice $record): string => InvoiceResource::getUrl('view', ['record' => $record->getRouteKey()])),
+            ])
             ->paginated([5, 10]);
     }
 }
