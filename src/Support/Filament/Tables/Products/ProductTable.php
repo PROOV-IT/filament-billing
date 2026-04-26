@@ -32,14 +32,14 @@ final class ProductTable
                     ->icon('heroicon-o-plus')
                     ->url(fn (): string => ProductResource::getUrl('create')),
             ])
-            ->recordActions([
+            ->actions([
                 Action::make('view')
                     ->label(__('filament-billing::filament-billing.actions.view'))
-                    ->url(fn (Product $record): string => ProductResource::getUrl('view', ['record' => $record->getRouteKey()])),
+                    ->url(fn (Product $record): string => ProductResource::getUrl('view', ['record' => $record])),
                 Action::make('edit')
                     ->label(__('filament-billing::filament-billing.actions.edit'))
                     ->visible(fn (Product $record): bool => self::canEdit($record))
-                    ->url(fn (Product $record): string => ProductResource::getUrl('edit', ['record' => $record->getRouteKey()])),
+                    ->url(fn (Product $record): string => ProductResource::getUrl('edit', ['record' => $record])),
                 DeleteAction::make()
                     ->label(__('filament-billing::filament-billing.actions.delete'))
                     ->visible(fn (Product $record): bool => self::canDelete($record)),

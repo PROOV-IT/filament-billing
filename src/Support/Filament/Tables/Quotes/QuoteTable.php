@@ -33,26 +33,26 @@ final class QuoteTable
                     ->icon('heroicon-o-plus')
                     ->url(fn (): string => QuoteResource::getUrl('create')),
             ])
-            ->recordActions([
-                // Action::make('view')
-                //     ->label(__('filament-billing::filament-billing.actions.view'))
-                //     ->url(fn (Quote $record): string => QuoteResource::getUrl('view', ['record' => $record->getRouteKey()])),
-                // Action::make('edit')
-                //     ->label(__('filament-billing::filament-billing.actions.edit'))
-                //     ->url(fn (Quote $record): string => QuoteResource::getUrl('edit', ['record' => $record->getRouteKey()]))
-                //     ->visible(fn (Quote $record): bool => self::canEdit($record)),
-                // Action::make('convert_to_invoice')
-                //     ->label(__('filament-billing::filament-billing.actions.convert_to_invoice'))
-                //     ->icon('heroicon-o-arrow-right')
-                //     ->color('success')
-                //     ->requiresConfirmation()
-                //     ->visible(fn (Quote $record): bool => self::canConvert($record))
-                //     ->action(static function (Quote $record): void {
-                //         app(ConvertQuoteToInvoiceAction::class)->handle($record);
-                //     }),
-                // DeleteAction::make()
-                //     ->label(__('filament-billing::filament-billing.actions.delete'))
-                //     ->visible(fn (Quote $record): bool => self::canDelete($record)),
+            ->actions([
+                Action::make('view')
+                    ->label(__('filament-billing::filament-billing.actions.view'))
+                    ->url(fn (Quote $record): string => QuoteResource::getUrl('view', ['record' => $record])),
+                Action::make('edit')
+                    ->label(__('filament-billing::filament-billing.actions.edit'))
+                    ->url(fn (Quote $record): string => QuoteResource::getUrl('edit', ['record' => $record]))
+                    ->visible(fn (Quote $record): bool => self::canEdit($record)),
+                Action::make('convert_to_invoice')
+                    ->label(__('filament-billing::filament-billing.actions.convert_to_invoice'))
+                    ->icon('heroicon-o-arrow-right')
+                    ->color('success')
+                    ->requiresConfirmation()
+                    ->visible(fn (Quote $record): bool => self::canConvert($record))
+                    ->action(static function (Quote $record): void {
+                        app(ConvertQuoteToInvoiceAction::class)->handle($record);
+                    }),
+                DeleteAction::make()
+                    ->label(__('filament-billing::filament-billing.actions.delete'))
+                    ->visible(fn (Quote $record): bool => self::canDelete($record)),
             ])
             ->bulkActions([
                 DeleteBulkAction::make()

@@ -29,7 +29,7 @@ final class PricesRelationManagerTable
                     ->label(__('filament-billing::filament-billing.actions.create'))
                     ->visible(fn (): bool => $canManagePrices),
             ])
-            ->recordActions([
+            ->actions([
                 EditAction::make()
                     ->label(__('filament-billing::filament-billing.actions.edit'))
                     ->visible(fn (ProductPrice $record): bool => $canManagePrices),

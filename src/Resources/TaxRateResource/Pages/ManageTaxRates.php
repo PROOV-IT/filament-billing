@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Proovit\FilamentBilling\Resources\TaxRateResource\Pages;
 
-use Filament\Resources\Pages\ManageRecords;
+use Filament\Resources\Pages\ListRecords;
 use Proovit\FilamentBilling\Resources\TaxRateResource;
 
-final class ManageTaxRates extends ManageRecords
+final class ManageTaxRates extends ListRecords
 {
     protected static string $resource = TaxRateResource::class;
 }

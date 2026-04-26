@@ -33,13 +33,13 @@ final class PaymentTable
                     ->icon('heroicon-o-plus')
                     ->url(fn (): string => PaymentResource::getUrl('create')),
             ])
-            ->recordActions([
+            ->actions([
                 Action::make('view')
                     ->label(__('filament-billing::filament-billing.actions.view'))
-                    ->url(fn (Payment $record): string => PaymentResource::getUrl('view', ['record' => $record->getRouteKey()])),
+                    ->url(fn (Payment $record): string => PaymentResource::getUrl('view', ['record' => $record])),
                 Action::make('edit')
                     ->label(__('filament-billing::filament-billing.actions.edit'))
-                    ->url(fn (Payment $record): string => PaymentResource::getUrl('edit', ['record' => $record->getRouteKey()]))
+                    ->url(fn (Payment $record): string => PaymentResource::getUrl('edit', ['record' => $record]))
                     ->visible(fn (Payment $record): bool => self::canEdit($record)),
                 DeleteAction::make()
                     ->label(__('filament-billing::filament-billing.actions.delete'))

@@ -30,7 +30,7 @@ final class LinesRelationManagerTable
                     ->label(__('filament-billing::filament-billing.actions.create'))
                     ->visible(fn (): bool => $canManageLineItems),
             ])
-            ->recordActions([
+            ->actions([
                 EditAction::make()
                     ->label(__('filament-billing::filament-billing.actions.edit'))
                     ->visible(fn (InvoiceLine $record): bool => $canManageLineItems),

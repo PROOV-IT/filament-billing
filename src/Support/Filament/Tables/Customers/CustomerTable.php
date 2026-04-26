@@ -31,13 +31,13 @@ final class CustomerTable
                     ->icon('heroicon-o-plus')
                     ->url(fn (): string => CustomerResource::getUrl('create')),
             ])
-            ->recordActions([
+            ->actions([
                 Action::make('view')
                     ->label(__('filament-billing::filament-billing.actions.view'))
-                    ->url(fn (Customer $record): string => CustomerResource::getUrl('view', ['record' => $record->getRouteKey()])),
+                    ->url(fn (Customer $record): string => CustomerResource::getUrl('view', ['record' => $record])),
                 Action::make('edit')
                     ->label(__('filament-billing::filament-billing.actions.edit'))
-                    ->url(fn (Customer $record): string => CustomerResource::getUrl('edit', ['record' => $record->getRouteKey()]))
+                    ->url(fn (Customer $record): string => CustomerResource::getUrl('edit', ['record' => $record]))
                     ->visible(fn (Customer $record): bool => self::canEdit($record)),
                 DeleteAction::make()
                     ->label(__('filament-billing::filament-billing.actions.delete'))
