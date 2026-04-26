@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Proovit\FilamentBilling\Resources\InvoiceResource\Pages;
 
 use Filament\Actions\Action;
+use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 use Proovit\Billing\Models\Invoice;
 use Proovit\FilamentBilling\Resources\InvoiceResource;
@@ -20,10 +21,10 @@ final class EditInvoice extends EditRecord
         $invoice = $this->record;
 
         return [
-            Action::make('view')
+            ViewAction::make('view')
                 ->label(__('filament-billing::filament-billing.actions.view'))
                 ->icon('heroicon-o-eye')
-                ->url(fn (): string => InvoiceResource::getUrl('view', ['record' => $invoice->getRouteKey()])),
+                ,
             ...InvoicePdfActions::headerActions($invoice),
         ];
     }

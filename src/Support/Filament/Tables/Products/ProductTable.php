@@ -7,6 +7,8 @@ namespace Proovit\FilamentBilling\Support\Filament\Tables\Products;
 use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -33,13 +35,13 @@ final class ProductTable
                     ->url(fn (): string => ProductResource::getUrl('create')),
             ])
             ->actions([
-                Action::make('view')
+                ViewAction::make('view')
                     ->label(__('filament-billing::filament-billing.actions.view'))
-                    ->url(fn (Product $record): string => ProductResource::getUrl('view', ['record' => $record])),
-                Action::make('edit')
+                    ,
+                EditAction::make('edit')
                     ->label(__('filament-billing::filament-billing.actions.edit'))
                     ->visible(fn (Product $record): bool => self::canEdit($record))
-                    ->url(fn (Product $record): string => ProductResource::getUrl('edit', ['record' => $record])),
+                    ,
                 DeleteAction::make()
                     ->label(__('filament-billing::filament-billing.actions.delete'))
                     ->visible(fn (Product $record): bool => self::canDelete($record)),

@@ -7,6 +7,8 @@ namespace Proovit\FilamentBilling\Support\Filament\Tables\Customers;
 use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Proovit\Billing\Models\Customer;
@@ -32,12 +34,12 @@ final class CustomerTable
                     ->url(fn (): string => CustomerResource::getUrl('create')),
             ])
             ->actions([
-                Action::make('view')
+                ViewAction::make('view')
                     ->label(__('filament-billing::filament-billing.actions.view'))
-                    ->url(fn (Customer $record): string => CustomerResource::getUrl('view', ['record' => $record])),
-                Action::make('edit')
+                    ,
+                EditAction::make('edit')
                     ->label(__('filament-billing::filament-billing.actions.edit'))
-                    ->url(fn (Customer $record): string => CustomerResource::getUrl('edit', ['record' => $record]))
+                    
                     ->visible(fn (Customer $record): bool => self::canEdit($record)),
                 DeleteAction::make()
                     ->label(__('filament-billing::filament-billing.actions.delete'))
