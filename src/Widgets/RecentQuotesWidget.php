@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Proovit\FilamentBilling\Widgets;
 
 use Filament\Actions\Action;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget;
@@ -42,9 +43,9 @@ final class RecentQuotesWidget extends TableWidget
                     ->formatStateUsing(static fn ($state, Quote $record): string => number_format((float) $state, 2, ',', ' ').' '.($record->currency ?? 'EUR')),
             ])
             ->actions([
-                Action::make('view')
+                ViewAction::make('view')
                     ->label(__('filament-billing::filament-billing.actions.view'))
-                    ->url(static fn (Quote $record): string => QuoteResource::getUrl('view', ['record' => $record])),
+                    ,
             ])
             ->paginated([5, 10]);
     }
