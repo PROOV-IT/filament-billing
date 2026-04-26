@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Proovit\FilamentBilling\Support\Filament\Tables\Companies;
 
-use Filament\Actions\CreateAction;
+use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
-use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Proovit\Billing\Models\Company;
@@ -31,16 +29,16 @@ final class CompanyTable
             ])
             ->defaultSort('legal_name')
             ->headerActions([
-                CreateAction::make()
+                Action::make('create')
                     ->label(__('filament-billing::filament-billing.actions.create'))
                     ->icon('heroicon-o-plus')
                     ->url(fn (): string => CompanyResource::getUrl('create')),
             ])
             ->recordActions([
-                ViewAction::make()
+                Action::make('view')
                     ->label(__('filament-billing::filament-billing.actions.view'))
                     ->url(fn (Company $record): string => CompanyResource::getUrl('view', ['record' => $record->getRouteKey()])),
-                EditAction::make()
+                Action::make('edit')
                     ->label(__('filament-billing::filament-billing.actions.edit'))
                     ->url(fn (Company $record): string => CompanyResource::getUrl('edit', ['record' => $record->getRouteKey()])),
                 DeleteAction::make()

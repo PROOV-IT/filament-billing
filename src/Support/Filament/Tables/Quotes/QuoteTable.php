@@ -7,8 +7,6 @@ namespace Proovit\FilamentBilling\Support\Filament\Tables\Quotes;
 use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
-use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Proovit\Billing\Actions\Quotes\ConvertQuoteToInvoiceAction;
@@ -36,10 +34,10 @@ final class QuoteTable
                     ->url(fn (): string => QuoteResource::getUrl('create')),
             ])
             ->recordActions([
-                ViewAction::make()
+                Action::make('view')
                     ->label(__('filament-billing::filament-billing.actions.view'))
                     ->url(fn (Quote $record): string => QuoteResource::getUrl('view', ['record' => $record->getRouteKey()])),
-                EditAction::make()
+                Action::make('edit')
                     ->label(__('filament-billing::filament-billing.actions.edit'))
                     ->url(fn (Quote $record): string => QuoteResource::getUrl('edit', ['record' => $record->getRouteKey()]))
                     ->visible(fn (Quote $record): bool => self::canEdit($record)),
