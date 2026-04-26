@@ -63,8 +63,8 @@ final class InvoiceResource extends Resource
         return [
             'index' => ManageInvoices::route('/'),
             'create' => CreateInvoice::route('/create'),
-            'view' => ViewInvoice::route('/{record}'),
-            'edit' => EditInvoice::route('/{record}/edit'),
+            'view' => ViewInvoice::route('/{invoice}'),
+            'edit' => EditInvoice::route('/{invoice}/edit'),
         ];
     }
 

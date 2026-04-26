@@ -38,10 +38,10 @@ final class QuoteTable
             ->actions([
                 ViewAction::make('view')
                     ->label(__('filament-billing::filament-billing.actions.view'))
-                    ->url(fn (Quote $record): string => QuoteResource::getUrl('view', ['record' => $record])),
+                    ->url(fn (Quote $record): string => QuoteResource::getUrl('view', ['quote' => $record])),
                 EditAction::make('edit')
                     ->label(__('filament-billing::filament-billing.actions.edit'))
-                    ->url(fn (Quote $record): string => QuoteResource::getUrl('edit', ['record' => $record]))
+                    ->url(fn (Quote $record): string => QuoteResource::getUrl('edit', ['quote' => $record]))
                     ->visible(fn (Quote $record): bool => self::canEdit($record)),
                 Action::make('convert_to_invoice')
                     ->label(__('filament-billing::filament-billing.actions.convert_to_invoice'))

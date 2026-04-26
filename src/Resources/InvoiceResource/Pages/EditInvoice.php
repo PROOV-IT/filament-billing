@@ -24,7 +24,7 @@ final class EditInvoice extends EditRecord
             ViewAction::make('view')
                 ->label(__('filament-billing::filament-billing.actions.view'))
                 ->icon('heroicon-o-eye')
-                ,
+                ->url(fn (): string => static::getResource()::getUrl('view', ['record' => $this->getRecord()])),
             ...InvoicePdfActions::headerActions($invoice),
         ];
     }
