@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Proovit\FilamentBilling\Support\Filament\Tables\InvoiceSeries;
 
-use Filament\Actions\CreateAction;
+use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
-use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Proovit\Billing\Models\InvoiceSeries;
@@ -30,16 +28,16 @@ final class InvoiceSeriesTable
                 TextColumn::make('is_default')->label(__('filament-billing::filament-billing.columns.default'))->badge()->formatStateUsing(static fn (bool $state): string => $state ? __('filament-billing::filament-billing.booleans.yes') : __('filament-billing::filament-billing.booleans.no')),
             ])
             ->headerActions([
-                CreateAction::make()
+                Action::make('create')
                     ->label(__('filament-billing::filament-billing.actions.create'))
                     ->icon('heroicon-o-plus')
                     ->url(fn (): string => InvoiceSeriesResource::getUrl('create')),
             ])
             ->recordActions([
-                ViewAction::make()
+                Action::make('view')
                     ->label(__('filament-billing::filament-billing.actions.view'))
                     ->url(fn (InvoiceSeries $record): string => InvoiceSeriesResource::getUrl('view', ['record' => $record->getRouteKey()])),
-                EditAction::make()
+                Action::make('edit')
                     ->label(__('filament-billing::filament-billing.actions.edit'))
                     ->url(fn (InvoiceSeries $record): string => InvoiceSeriesResource::getUrl('edit', ['record' => $record->getRouteKey()]))
                     ->visible(fn (InvoiceSeries $record): bool => self::canEdit($record)),

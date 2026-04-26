@@ -7,8 +7,6 @@ namespace Proovit\FilamentBilling\Support\Filament\Tables\Invoices;
 use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
-use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Proovit\Billing\Enums\InvoiceStatus;
@@ -39,11 +37,11 @@ final class InvoiceTable
                     ->url(fn (): string => InvoiceResource::getUrl('create')),
             ])
             ->recordActions([
-                ViewAction::make()
+                Action::make('view')
                     ->label(__('filament-billing::filament-billing.actions.view'))
                     ->url(fn (Invoice $record): string => InvoiceResource::getUrl('view', ['record' => $record->getRouteKey()])),
                 InvoicePdfActions::downloadTableAction(),
-                EditAction::make()
+                Action::make('edit')
                     ->label(__('filament-billing::filament-billing.actions.edit'))
                     ->url(fn (Invoice $record): string => InvoiceResource::getUrl('edit', ['record' => $record->getRouteKey()]))
                     ->visible(fn (Invoice $record): bool => self::canEdit($record)),
