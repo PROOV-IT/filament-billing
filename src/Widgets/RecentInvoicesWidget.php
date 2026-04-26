@@ -48,7 +48,7 @@ final class RecentInvoicesWidget extends TableWidget
             ->recordActions([
                 Action::make('view')
                     ->label(__('filament-billing::filament-billing.actions.view'))
-                    ->url(static fn (Invoice $record): string => InvoiceResource::getUrl('view', ['record' => $record->getRouteKey()])),
+                    ->url(fn (Invoice $record): string => InvoiceResource::getUrl('view', ['record' => $record])),
             ])
             ->paginated([5, 10]);
     }

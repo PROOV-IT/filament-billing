@@ -33,10 +33,10 @@ final class TaxRateTable
             ->recordActions([
                 Action::make('view')
                     ->label(__('filament-billing::filament-billing.actions.view'))
-                    ->url(fn (TaxRate $record): string => TaxRateResource::getUrl('view', ['record' => $record->getRouteKey()])),
+                    ->url(fn (TaxRate $record): string => TaxRateResource::getUrl('view', ['record' => $record])),
                 Action::make('edit')
                     ->label(__('filament-billing::filament-billing.actions.edit'))
-                    ->url(fn (TaxRate $record): string => TaxRateResource::getUrl('edit', ['record' => $record->getRouteKey()]))
+                    ->url(fn (TaxRate $record): string => TaxRateResource::getUrl('edit', ['record' => $record]))
                     ->visible(fn (TaxRate $record): bool => self::canEdit($record)),
                 DeleteAction::make()
                     ->label(__('filament-billing::filament-billing.actions.delete'))

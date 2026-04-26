@@ -36,10 +36,10 @@ final class InvoiceSeriesTable
             ->recordActions([
                 Action::make('view')
                     ->label(__('filament-billing::filament-billing.actions.view'))
-                    ->url(fn (InvoiceSeries $record): string => InvoiceSeriesResource::getUrl('view', ['record' => $record->getRouteKey()])),
+                    ->url(fn (InvoiceSeries $record): string => InvoiceSeriesResource::getUrl('view', ['record' => $record])),
                 Action::make('edit')
                     ->label(__('filament-billing::filament-billing.actions.edit'))
-                    ->url(fn (InvoiceSeries $record): string => InvoiceSeriesResource::getUrl('edit', ['record' => $record->getRouteKey()]))
+                    ->url(fn (InvoiceSeries $record): string => InvoiceSeriesResource::getUrl('edit', ['record' => $record]))
                     ->visible(fn (InvoiceSeries $record): bool => self::canEdit($record)),
                 DeleteAction::make()
                     ->label(__('filament-billing::filament-billing.actions.delete'))
